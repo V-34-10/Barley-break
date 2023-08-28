@@ -2,6 +2,8 @@
     <string name="app_name">Fifteen puzzle</string>
     <string name="time_title">Time: 00:00:00</string>
     <string name="move_title">Move: 0</string>
+    <string name="time">Time: </string>
+    <string name="move">Move: </string>
     <string name="backButton">backButton</string>
     <string name="infoButton">infoButton</string>
     <string name="refreshButton">refreshButton</string>

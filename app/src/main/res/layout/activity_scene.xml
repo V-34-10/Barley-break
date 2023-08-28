@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/scene_screen"
     tools:context=".ui.main.SceneActivity">
 
@@ -21,8 +21,9 @@
 
         <LinearLayout
             android:id="@+id/leftPart"
-            android:layout_width="180dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:orientation="vertical">
 
             <TextView
@@ -34,10 +35,10 @@
                 android:text="@string/time_title"
                 android:textAlignment="center"
                 android:textColor="@color/white"
-                android:textSize="21sp" />
+                android:textSize="@dimen/sp16" />
 
             <TextView
-                android:id="@+id/textAnnotation"
+                android:id="@+id/move_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dp5"
@@ -45,88 +46,85 @@
                 android:text="@string/move_title"
                 android:textAlignment="center"
                 android:textColor="@color/white"
-                android:textSize="21sp" />
+                android:textSize="@dimen/sp16" />
 
         </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/controlPart"
-        android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/controlPart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/dp5"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/exitButton"
+                android:layout_width="@dimen/dp50"
+                android:layout_height="@dimen/dp50"
+                android:layout_marginEnd="@dimen/dp5"
+                android:backgroundTint="@color/white"
+                android:contentDescription="@string/exitButton"
+                android:textColor="@color/black"
+                app:icon="@drawable/buttn_exit"
+                app:iconGravity="start"
+                app:iconSize="20dp"
+                app:iconTint="@color/black" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/backButton"
+                android:layout_width="@dimen/dp50"
+                android:layout_height="@dimen/dp50"
+                android:layout_marginEnd="@dimen/dp5"
+                android:backgroundTint="@color/white"
+                android:contentDescription="@string/backButton"
+                android:textColor="@color/black"
+                app:icon="@drawable/buttn_go_back"
+                app:iconGravity="start"
+                app:iconSize="20dp"
+                app:iconTint="@color/black" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/infoButton"
+                android:layout_width="@dimen/dp50"
+                android:layout_height="@dimen/dp50"
+                android:layout_marginEnd="@dimen/dp5"
+                android:backgroundTint="@color/white"
+                android:contentDescription="@string/infoButton"
+                android:textColor="@color/black"
+                app:icon="@drawable/buttn_refresh"
+                app:iconGravity="start"
+                app:iconSize="20dp"
+                app:iconTint="@color/black" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/refreshButton"
+                android:layout_width="@dimen/dp50"
+                android:layout_height="@dimen/dp50"
+                android:backgroundTint="@color/white"
+                android:contentDescription="@string/refreshButton"
+                android:textColor="@color/black"
+                app:icon="@drawable/buttn_info"
+                app:iconGravity="start"
+                app:iconSize="20dp"
+                app:iconTint="@color/black" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/sceneGame"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dp5"
-        android:layout_gravity="center"
-        android:orientation="horizontal">
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/exitButton"
-            android:layout_width="@dimen/dp50"
-            android:layout_height="@dimen/dp50"
-            android:layout_marginEnd="@dimen/dp5"
-            android:backgroundTint="@color/white"
-            android:contentDescription="@string/exitButton"
-            android:textColor="@color/black"
-            app:icon="@drawable/buttn_exit"
-            app:iconGravity="start"
-            app:iconPadding="@dimen/dp0"
-            app:iconSize="20dp"
-            app:iconTint="@color/black" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/backButton"
-            android:layout_width="@dimen/dp50"
-            android:layout_height="@dimen/dp50"
-            android:layout_marginEnd="@dimen/dp5"
-            android:backgroundTint="@color/white"
-            android:contentDescription="@string/backButton"
-            android:textColor="@color/black"
-            app:icon="@drawable/buttn_go_back"
-            app:iconGravity="start"
-            app:iconPadding="@dimen/dp0"
-            app:iconSize="20dp"
-            app:iconTint="@color/black" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/infoButton"
-            android:layout_width="@dimen/dp50"
-            android:layout_height="@dimen/dp50"
-            android:layout_marginEnd="@dimen/dp5"
-            android:backgroundTint="@color/white"
-            android:contentDescription="@string/infoButton"
-            android:textColor="@color/black"
-            app:icon="@drawable/buttn_refresh"
-            app:iconGravity="start"
-            app:iconPadding="@dimen/dp0"
-            app:iconSize="20dp"
-            app:iconTint="@color/black" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/refreshButton"
-            android:layout_width="@dimen/dp50"
-            android:layout_height="@dimen/dp50"
-            android:backgroundTint="@color/white"
-            android:contentDescription="@string/refreshButton"
-            android:textColor="@color/black"
-            app:icon="@drawable/buttn_info"
-            app:iconGravity="start"
-            app:iconPadding="@dimen/dp0"
-            app:iconSize="20dp"
-            app:iconTint="@color/black" />
-
-    </LinearLayout>
-
-
-
-    </LinearLayout>
-
-    <GridView
-        android:id="@+id/firstSection"
-        android:layout_width="wrap_content"
-        android:layout_height="575dp"
-        android:alpha="0.9"
         android:background="@drawable/section_background"
+        android:orientation="vertical"
+        android:padding="@dimen/dp15"
+        android:scaleType="centerCrop"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/menu" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
