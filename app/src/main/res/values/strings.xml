@@ -13,4 +13,9 @@
     <string name="titleVictory">Victory!</string>
     <string name="victoryMessage">My Congratulations! You completed the puzzle!</string>
     <string name="restartButton">Restart</string>
+    <string name="infoMessage"><br>The puzzle is a set of 15 bones with fragments of a picture.</br>
+        <br>It is necessary to collect the complete picture by moving them,</br>
+        <br>preferably in as few moves as possible.</br>
+        <br>Good luck!</br></string>
+    <string name="okButton">Go</string>
 </resources>

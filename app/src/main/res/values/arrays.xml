@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="tile_images">
+        <item>@drawable/as_1</item>
+        <item>@drawable/as_2</item>
+        <item>@drawable/as_3</item>
+        <item>@drawable/as_4</item>
+        <item>@drawable/as_5</item>
+        <item>@drawable/as_6</item>
+        <item>@drawable/as_7</item>
+        <item>@drawable/as_8</item>
+        <item>@drawable/as_9</item>
+        <item>@drawable/as_10</item>
+        <item>@drawable/as_11</item>
+        <item>@drawable/as_12</item>
+        <item>@drawable/as_13</item>
+        <item>@drawable/as_14</item>
+        <item>@drawable/as_15</item>
+        <item>@drawable/as_16</item>
+    </array>
+
+    <array name="music_tracks">
+        <item>asia.mp3</item>
+        <item>dream.mp3</item>
+        <item>wow.mp3</item>
+        <item>happylife.mp3</item>
+        <item>electrodoodle.mp3</item>
+    </array>
+</resources>

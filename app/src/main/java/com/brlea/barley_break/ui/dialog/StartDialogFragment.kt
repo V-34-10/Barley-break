@@ -24,8 +24,8 @@ class StartDialogFragment : DialogFragment() {
             .setMessage(R.string.startMessage)
             .setPositiveButton(R.string.startButton) { _, _ ->
                 // Dismiss the dialog when the "Start" button is clicked
-                dismiss()
                 dialogFragmentDismissListener?.onDialogDismissed()
+                dismiss()
             }
         return builder.create()
     }

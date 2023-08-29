@@ -6,9 +6,12 @@ import android.view.ViewGroup
 import android.view.animation.OvershootInterpolator
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.brlea.barley_break.R
+import com.brlea.barley_break.ui.dialog.StartDialogFragment
+import com.brlea.barley_break.ui.dialog.VictoryDialogFragment
 import java.util.*
 import kotlin.math.abs
 
@@ -16,14 +19,32 @@ class TileAdapter(
     private val recyclerView: RecyclerView,
     private val tileList: MutableList<Int>,
     private val moveCounter: TextView,
-    private val moveListener: MoveListener
+    private val timeTitle: TextView,
+    private val moveListener: MoveListener,
+    private val dialogFragmentDismissListener: StartDialogFragment.DialogFragmentDismissListener
 ) : RecyclerView.Adapter<TileAdapter.ViewHolder>() {
 
     private var emptyPosition: Int = tileList.size - 1
     private var moves = 0
     private var startTime: Long = 0 // Initialize the startTime property
-    private val correctTilePositions: List<Int> =
-        tileList.indices.toList() // Expected positions of tiles
+    private val correctTilePositions: List<Int> = listOf(
+        R.drawable.as_1,
+        R.drawable.as_2,
+        R.drawable.as_3,
+        R.drawable.as_4,
+        R.drawable.as_5,
+        R.drawable.as_6,
+        R.drawable.as_7,
+        R.drawable.as_8,
+        R.drawable.as_9,
+        R.drawable.as_10,
+        R.drawable.as_11,
+        R.drawable.as_12,
+        R.drawable.as_13,
+        R.drawable.as_14,
+        R.drawable.as_15,
+        R.drawable.as_16
+    ) // Expected positions of tiles
 
     fun setStartTime(startTime: Long) {
         this.startTime = startTime
@@ -36,6 +57,7 @@ class TileAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(tileList[position])
+        moveCounter.text = moves.toString()
     }
 
     override fun getItemCount(): Int {
@@ -47,15 +69,14 @@ class TileAdapter(
 
         fun bind(tileImageResource: Int) {
             imageView.setImageResource(tileImageResource)
-            //
             itemView.setOnClickListener {
-                if (canMove(position)) {
+                if (canMove(bindingAdapterPosition)) {
                     moves++
                     moveCounter.text = moves.toString()
-                    swapTiles(position, emptyPosition)
-                    notifyItemChanged(position)
+                    swapTiles(bindingAdapterPosition, emptyPosition)
+                    notifyItemChanged(bindingAdapterPosition)
                     notifyItemChanged(emptyPosition)
-                    emptyPosition = position
+                    emptyPosition = bindingAdapterPosition
 
                     // Update the elapsed time after each click
                     (itemView.context as SceneActivity).updateElapsedTime(startTime)
@@ -69,16 +90,15 @@ class TileAdapter(
         }
 
         private fun animateTitleWithTimeAndMoves() {
-            val titleTextView: TextView = itemView.findViewById(R.id.time_title)
-            // Animate the title view
-            titleTextView.animate()
+            // Animate the title time view
+            timeTitle.animate()
                 .scaleX(1.2f)
                 .scaleY(1.2f)
                 .setDuration(500)
                 .setInterpolator(OvershootInterpolator())
                 .withEndAction {
                     // After scaling up, animate back to the original size
-                    titleTextView.animate()
+                    timeTitle.animate()
                         .scaleX(1f)
                         .scaleY(1f)
                         .setDuration(300)
@@ -114,8 +134,8 @@ class TileAdapter(
                 viewHolder: RecyclerView.ViewHolder,
                 target: RecyclerView.ViewHolder
             ): Boolean {
-                val fromPosition = viewHolder.adapterPosition
-                val toPosition = target.adapterPosition
+                val fromPosition = viewHolder.bindingAdapterPosition
+                val toPosition = target.bindingAdapterPosition
                 if (canMove(fromPosition) && canMove(toPosition)) {
                     swapTiles(fromPosition, toPosition)
                     emptyPosition = toPosition
@@ -137,8 +157,8 @@ class TileAdapter(
         val emptyRow = emptyPosition / gridSize
         val emptyCol = emptyPosition % gridSize
 
-        return (clickedRow == emptyRow && abs(clickedCol - emptyCol) == 1) ||
-                (clickedCol == emptyCol && abs(clickedRow - emptyRow) == 1)
+        // Check if the clicked position is adjacent to the empty position
+        return (abs(clickedRow - emptyRow) + abs(clickedCol - emptyCol) == 1)
     }
 
     private fun swapTiles(fromPosition: Int, toPosition: Int) {
@@ -146,18 +166,25 @@ class TileAdapter(
         // update elements in RecyclerView
         notifyItemChanged(fromPosition)
         notifyItemChanged(toPosition)
+
+        if (checkPuzzleCompletion()) {
+            val victoryDialog = VictoryDialogFragment()
+            victoryDialog.setDialogFragmentDismissListener(dialogFragmentDismissListener as SceneActivity)
+            victoryDialog.show(
+                (recyclerView.context as AppCompatActivity).supportFragmentManager,
+                "victory_dialog"
+            )
+        }
     }
 
-    fun checkPuzzleCompletion(): Boolean {
+    private fun checkPuzzleCompletion(): Boolean {
         for (i in 0 until tileList.size) {
-            if (getPositionForTile(tileList[i]) != correctTilePositions[i]) {
+            val currentTile = tileList[i]
+            val correctTilePosition = correctTilePositions.indexOf(currentTile)
+            if (i != correctTilePosition) {
                 return false // At least one tile is not in the correct position
             }
         }
         return true // All tiles are in the correct position
-    }
-
-    private fun getPositionForTile(tileImageResource: Int): Int {
-        return tileList.indexOf(tileImageResource)
     }
 }
