@@ -3,6 +3,7 @@ package com.brlea.barley_break.ui.main
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.OvershootInterpolator
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -21,6 +22,8 @@ class TileAdapter(
     private var emptyPosition: Int = tileList.size - 1
     private var moves = 0
     private var startTime: Long = 0 // Initialize the startTime property
+    private val correctTilePositions: List<Int> =
+        tileList.indices.toList() // Expected positions of tiles
 
     fun setStartTime(startTime: Long) {
         this.startTime = startTime
@@ -38,7 +41,6 @@ class TileAdapter(
     override fun getItemCount(): Int {
         return tileList.size
     }
-
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val imageView: ImageView = itemView.findViewById(R.id.imagePart)
@@ -59,10 +61,46 @@ class TileAdapter(
                     (itemView.context as SceneActivity).updateElapsedTime(startTime)
                     // Notify the activity of the move
                     moveListener.onMoveMade(moves)
+                    animateTitleWithTimeAndMoves()
 
                 }
             }
 
+        }
+
+        private fun animateTitleWithTimeAndMoves() {
+            val titleTextView: TextView = itemView.findViewById(R.id.time_title)
+            // Animate the title view
+            titleTextView.animate()
+                .scaleX(1.2f)
+                .scaleY(1.2f)
+                .setDuration(500)
+                .setInterpolator(OvershootInterpolator())
+                .withEndAction {
+                    // After scaling up, animate back to the original size
+                    titleTextView.animate()
+                        .scaleX(1f)
+                        .scaleY(1f)
+                        .setDuration(300)
+                        .start()
+                }
+                .start()
+
+            // Animate the move count view
+            moveCounter.animate()
+                .scaleX(1.2f)
+                .scaleY(1.2f)
+                .setDuration(500)
+                .setInterpolator(OvershootInterpolator())
+                .withEndAction {
+                    // After scaling up, animate back to the original size
+                    moveCounter.animate()
+                        .scaleX(1f)
+                        .scaleY(1f)
+                        .setDuration(300)
+                        .start()
+                }
+                .start()
         }
     }
 
@@ -108,5 +146,18 @@ class TileAdapter(
         // update elements in RecyclerView
         notifyItemChanged(fromPosition)
         notifyItemChanged(toPosition)
+    }
+
+    fun checkPuzzleCompletion(): Boolean {
+        for (i in 0 until tileList.size) {
+            if (getPositionForTile(tileList[i]) != correctTilePositions[i]) {
+                return false // At least one tile is not in the correct position
+            }
+        }
+        return true // All tiles are in the correct position
+    }
+
+    private fun getPositionForTile(tileImageResource: Int): Int {
+        return tileList.indexOf(tileImageResource)
     }
 }

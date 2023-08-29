@@ -8,4 +8,9 @@
     <string name="infoButton">infoButton</string>
     <string name="refreshButton">refreshButton</string>
     <string name="exitButton">exitButton</string>
+    <string name="startMessage">Welcome to the game! Click to start!</string>
+    <string name="startButton">Start</string>
+    <string name="titleVictory">Victory!</string>
+    <string name="victoryMessage">My Congratulations! You completed the puzzle!</string>
+    <string name="restartButton">Restart</string>
 </resources>
