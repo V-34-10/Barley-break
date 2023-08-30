@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.GridLayoutManager
 import com.brlea.barley_break.R
 import com.brlea.barley_break.ui.dialog.InfoDialogFragment
@@ -59,6 +60,7 @@ class SceneActivity : AppCompatActivity(), MoveListener,
         R.drawable.as_15
     )
     private var isMusicOn = true
+    private lateinit var tileAdapter: TileAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_scene)
@@ -97,52 +99,55 @@ class SceneActivity : AppCompatActivity(), MoveListener,
 
         finishedButton.setOnClickListener {
             finishedButton.startAnimation(animation)
-            val adapter = TileAdapter(
+            tileAdapter = TileAdapter(
                 sceneGame,
                 (tileImagesOriginal + R.drawable.as_16) as MutableList<Int>,
-                move_title,
-                time_title,
+                move_value,
+                time_value,
                 this,
                 this
             )
-            adapter.setStartTime(System.currentTimeMillis()) // Set the start time
+            tileAdapter.setStartTime(System.currentTimeMillis()) // Set the start time
 
             sceneGame.apply {
                 layoutManager = GridLayoutManager(this@SceneActivity, 4)
-                this.adapter = adapter
+                this.adapter = tileAdapter
             }
         }
 
         toggleButton.setOnClickListener{
-            if (isMusicOn) {
+            isMusicOn = if (isMusicOn) {
                 toggleButton.startAnimation(animation)
-                mediaPlayer.stop()
+                /*mediaPlayer.stop()
+                mediaPlayer = MediaPlayer.create(this, getRandomMusicTrack())*/
                 toggleButton.setIconResource(R.drawable.ic_baseline_music_off_24)
+                false
             } else {
                 toggleButton.startAnimation(animation)
-                mediaPlayer.start()
+                //mediaPlayer.start()
                 toggleButton.setIconResource(R.drawable.ic_baseline_music_note_24)
+                true
             }
-            isMusicOn = !isMusicOn
+            tileAdapter.updateMusicState(isMusicOn)
         }
     }
 
-    fun initRecycler() {
+    private fun initRecycler() {
         tileImagesShuffle.shuffle()
-        val adapter = TileAdapter(
+        tileAdapter = TileAdapter(
             sceneGame,
             (tileImagesShuffle + R.drawable.as_16) as MutableList<Int>,
-            move_title,
-            time_title,
+            move_value,
+            time_value,
             this,
             this
         )
-        adapter.setStartTime(System.currentTimeMillis()) // Set the start time
+        tileAdapter.setStartTime(System.currentTimeMillis()) // Set the start time
 
         sceneGame.apply {
             layoutManager = GridLayoutManager(this@SceneActivity, 4)
             //addItemDecoration(GridSpacingItemDecoration(4, 8)) // Add separator
-            this.adapter = adapter
+            this.adapter = tileAdapter
         }
     }
 
@@ -163,7 +168,7 @@ class SceneActivity : AppCompatActivity(), MoveListener,
     override fun onDialogDismissed() {
         // The dialog has been dismissed, you can start the main game session here
         initRecycler()
-        initMedia()
+        //initMedia()
     }
 
     private fun getRandomMusicTrack(): Int {
@@ -180,31 +185,29 @@ class SceneActivity : AppCompatActivity(), MoveListener,
         val minutes = TimeUnit.MILLISECONDS.toMinutes(elapsedTime) % 60
         val seconds = TimeUnit.MILLISECONDS.toSeconds(elapsedTime) % 60
 
-        val timeString = String.format("Time: %02d:%02d:%02d", hours, minutes, seconds)
-        time_title.text = timeString
+        val timeString = String.format("%02d:%02d:%02d", hours, minutes, seconds)
+        time_value.text = timeString
     }
 
     override fun onMoveMade(moveCount: Int) {
         this.moveCount = moveCount
-        val message = getString(R.string.move) + moveCount
-        move_title.text = message
+        move_value.text = moveCount.toString()
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        mediaPlayer.release()
+        //mediaPlayer.release()
     }
 
     override fun onRestartClicked() {
         // Release the media player
-        mediaPlayer.release()
+        //mediaPlayer.release()
 
-        // Reset time, move
+        // Reset time, move, toggleButton
         moveCount = 0
-        val message = getString(R.string.move) + moveCount
-        move_title.text = message
-        time_title.text = getString(R.string.time_title)
-
+        move_value.text = moveCount.toString()
+        time_value.text = getString(R.string.time)
+        toggleButton.setIconResource(R.drawable.ic_baseline_music_note_24)
         // Reset adapter and recycler view
         onDialogDismissed()
     }

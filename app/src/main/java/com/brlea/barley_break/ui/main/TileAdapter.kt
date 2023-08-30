@@ -1,6 +1,7 @@
 package com.brlea.barley_break.ui.main
 
 import android.media.MediaPlayer
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -47,9 +48,14 @@ class TileAdapter(
         R.drawable.as_16
     ) // Expected positions of tiles
     private var mediaPlayer: MediaPlayer = MediaPlayer.create(recyclerView.context, R.raw.stones)
-    private var isAudioPlaying = false
+    private var isMusicOn = true
     fun setStartTime(startTime: Long) {
         this.startTime = startTime
+    }
+
+    fun updateMusicState(isMusicOn: Boolean) {
+        this.isMusicOn = isMusicOn
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -68,6 +74,17 @@ class TileAdapter(
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val imageView: ImageView = itemView.findViewById(R.id.imagePart)
+        private val handler = Handler()
+        private val updateTimeRunnable = object : Runnable {
+            override fun run() {
+                (itemView.context as SceneActivity).updateElapsedTime(startTime)
+                handler.postDelayed(this, 1000)
+            }
+        }
+
+        init {
+            handler.postDelayed(updateTimeRunnable, 1000)
+        }
 
         fun bind(tileImageResource: Int) {
             imageView.setImageResource(tileImageResource)
@@ -80,29 +97,26 @@ class TileAdapter(
                     notifyItemChanged(emptyPosition)
                     emptyPosition = bindingAdapterPosition
 
-                    // Update the elapsed time after each click
-                    (itemView.context as SceneActivity).updateElapsedTime(startTime)
                     // Notify the activity of the move
                     moveListener.onMoveMade(moves)
                     animateTitleWithTimeAndMoves()
 
-                    isAudioPlaying = if (isAudioPlaying) {
-                        mediaPlayer.pause()
-                        false
-                    } else {
+                    if (isMusicOn) {
                         mediaPlayer.start()
-                        true
                     }
-
                 }
             }
+        }
+
+        fun recycle() {
+            handler.removeCallbacks(updateTimeRunnable)
         }
 
         private fun animateTitleWithTimeAndMoves() {
             // Animate the title time view
             timeTitle.animate()
-                .scaleX(1.2f)
-                .scaleY(1.2f)
+                .scaleX(1.1f)
+                .scaleY(1.1f)
                 .setDuration(500)
                 .setInterpolator(OvershootInterpolator())
                 .withEndAction {
@@ -117,8 +131,8 @@ class TileAdapter(
 
             // Animate the move count view
             moveCounter.animate()
-                .scaleX(1.2f)
-                .scaleY(1.2f)
+                .scaleX(1.1f)
+                .scaleY(1.1f)
                 .setDuration(500)
                 .setInterpolator(OvershootInterpolator())
                 .withEndAction {
@@ -195,5 +209,10 @@ class TileAdapter(
             }
         }
         return true // All tiles are in the correct position
+    }
+
+    override fun onViewRecycled(holder: ViewHolder) {
+        super.onViewRecycled(holder)
+        holder.recycle()
     }
 }

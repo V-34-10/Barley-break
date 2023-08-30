@@ -22,7 +22,7 @@
     <dimen name="dp50">50dp</dimen>
     <dimen name="dp85">85dp</dimen>
     <dimen name="dp9">9dp</dimen>
-    <dimen name="button_size">36dp</dimen>
+    <dimen name="button_size">45dp</dimen>
     <dimen name="button_icon_size">15dp</dimen>
     <dimen name="dp40">40dp</dimen>
     <dimen name="dp8">8dp</dimen>

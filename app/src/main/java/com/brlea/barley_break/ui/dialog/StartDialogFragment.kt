@@ -30,11 +30,15 @@ class StartDialogFragment : DialogFragment() {
             }
 
         // Set onCancelListener to dismiss the dialog when clicked outside
-        builder.setOnCancelListener {
-            dismiss()
-            (activity as? SceneActivity)?.initRecycler()
+        val dialog = builder.create()
+        dialog.setCancelable(false)
+        dialog.setOnShowListener {
+            dialog.window?.decorView?.apply {
+                setOnTouchListener { _, _ -> true }
+                setOnClickListener(null)
+            }
         }
 
-        return builder.create()
+        return dialog
     }
 }
