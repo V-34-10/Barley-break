@@ -3,6 +3,7 @@ package com.brlea.barley_break.ui.main
 import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.GridLayoutManager
@@ -57,7 +58,7 @@ class SceneActivity : AppCompatActivity(), MoveListener,
         R.drawable.as_14,
         R.drawable.as_15
     )
-
+    private var isMusicOn = true
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_scene)
@@ -111,9 +112,22 @@ class SceneActivity : AppCompatActivity(), MoveListener,
                 this.adapter = adapter
             }
         }
+
+        toggleButton.setOnClickListener{
+            if (isMusicOn) {
+                toggleButton.startAnimation(animation)
+                mediaPlayer.stop()
+                toggleButton.setIconResource(R.drawable.ic_baseline_music_off_24)
+            } else {
+                toggleButton.startAnimation(animation)
+                mediaPlayer.start()
+                toggleButton.setIconResource(R.drawable.ic_baseline_music_note_24)
+            }
+            isMusicOn = !isMusicOn
+        }
     }
 
-    private fun initRecycler() {
+    fun initRecycler() {
         tileImagesShuffle.shuffle()
         val adapter = TileAdapter(
             sceneGame,
@@ -193,5 +207,28 @@ class SceneActivity : AppCompatActivity(), MoveListener,
 
         // Reset adapter and recycler view
         onDialogDismissed()
+    }
+
+    private fun hideSystemUI() {
+        val decorView = window.decorView
+        decorView.systemUiVisibility = (
+                View.SYSTEM_UI_FLAG_IMMERSIVE
+                        // Hide navigation bar and status bar
+                        or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        or View.SYSTEM_UI_FLAG_FULLSCREEN
+                        // Allow full panels to be displayed during user interaction
+                        or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        // Hide the navigation bar when the activity is first shown
+                        or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                )
+    }
+
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        if (hasFocus) {
+            hideSystemUI()
+        }
     }
 }

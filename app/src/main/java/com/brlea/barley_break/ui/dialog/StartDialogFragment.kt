@@ -5,6 +5,7 @@ import android.app.Dialog
 import android.os.Bundle
 import androidx.fragment.app.DialogFragment
 import com.brlea.barley_break.R
+import com.brlea.barley_break.ui.main.SceneActivity
 
 class StartDialogFragment : DialogFragment() {
 
@@ -27,6 +28,13 @@ class StartDialogFragment : DialogFragment() {
                 dialogFragmentDismissListener?.onDialogDismissed()
                 dismiss()
             }
+
+        // Set onCancelListener to dismiss the dialog when clicked outside
+        builder.setOnCancelListener {
+            dismiss()
+            (activity as? SceneActivity)?.initRecycler()
+        }
+
         return builder.create()
     }
 }

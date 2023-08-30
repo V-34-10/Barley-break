@@ -18,4 +18,5 @@
         <br>preferably in as few moves as possible.</br>
         <br>Good luck!</br></string>
     <string name="okButton">Go</string>
+    <string name="toggleButton">toggleButton</string>
 </resources>

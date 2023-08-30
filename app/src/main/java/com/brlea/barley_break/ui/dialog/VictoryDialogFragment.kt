@@ -28,6 +28,13 @@ class VictoryDialogFragment : DialogFragment() {
                 dialogFragmentDismissListener?.onRestartClicked()
                 dismiss()
             }
+
+        // Set onCancelListener to dismiss the dialog when clicked outside
+        builder.setOnCancelListener {
+            dismiss()
+            (activity as? SceneActivity)?.onRestartClicked()
+        }
+
         return builder.create()
     }
 }

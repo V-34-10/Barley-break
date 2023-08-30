@@ -7,7 +7,7 @@
     android:background="@drawable/scene_screen"
     tools:context=".ui.main.SceneActivity">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/menu"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp100"
@@ -19,12 +19,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/leftPart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/time_title"
@@ -35,7 +38,9 @@
                 android:text="@string/time_title"
                 android:textAlignment="center"
                 android:textColor="@color/white"
-                android:textSize="@dimen/sp16" />
+                android:textSize="@dimen/text_size"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/move_title"
@@ -46,72 +51,96 @@
                 android:text="@string/move_title"
                 android:textAlignment="center"
                 android:textColor="@color/white"
-                android:textSize="@dimen/sp16" />
+                android:textSize="@dimen/text_size"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/time_title" />
 
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/controlPart"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="@dimen/dp5"
-            android:orientation="horizontal">
+            android:layout_height="@dimen/dp0"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toEndOf="@+id/leftPart"
+            app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/exitButton"
-                android:layout_width="@dimen/dp50"
-                android:layout_height="@dimen/dp50"
-                android:layout_marginEnd="@dimen/dp5"
+                android:layout_width="@dimen/button_size"
+                android:layout_height="@dimen/button_size"
+                android:layout_marginStart="@dimen/dp5"
                 android:backgroundTint="@color/white"
                 android:contentDescription="@string/exitButton"
                 android:textColor="@color/black"
                 app:icon="@drawable/buttn_exit"
                 app:iconGravity="start"
-                app:iconSize="20dp"
-                app:iconTint="@color/black" />
+                app:iconSize="@dimen/button_icon_size"
+                app:iconTint="@color/black"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="TouchTargetSizeCheck" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/finishedButton"
-                android:layout_width="@dimen/dp50"
-                android:layout_height="@dimen/dp50"
-                android:layout_marginEnd="@dimen/dp5"
+                android:layout_width="@dimen/button_size"
+                android:layout_height="@dimen/button_size"
+                android:layout_marginStart="@dimen/dp5"
                 android:backgroundTint="@color/white"
                 android:contentDescription="@string/backButton"
                 android:textColor="@color/black"
                 app:icon="@drawable/ic_baseline_assignment_turned_in_24"
                 app:iconGravity="start"
-                app:iconSize="25dp"
-                app:iconTint="@color/black" />
+                app:iconSize="@dimen/button_icon_size"
+                app:iconTint="@color/black"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/exitButton"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="TouchTargetSizeCheck" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/refreshButton"
-                android:layout_width="@dimen/dp50"
-                android:layout_height="@dimen/dp50"
+                android:layout_width="@dimen/button_size"
+                android:layout_height="@dimen/button_size"
+                android:layout_marginStart="@dimen/dp5"
+                android:backgroundTint="@color/white"
+                android:contentDescription="@string/refreshButton"
+                android:textColor="@color/black"
+                app:icon="@drawable/buttn_refresh"
+                app:iconGravity="start"
+                app:iconSize="@dimen/button_icon_size"
+                app:iconTint="@color/black"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/finishedButton"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/infoButton"
+                android:layout_width="@dimen/button_size"
+                android:layout_height="@dimen/button_size"
+                android:layout_marginStart="@dimen/dp5"
                 android:layout_marginEnd="@dimen/dp5"
                 android:backgroundTint="@color/white"
                 android:contentDescription="@string/infoButton"
                 android:textColor="@color/black"
-                app:icon="@drawable/buttn_refresh"
-                app:iconGravity="start"
-                app:iconSize="20dp"
-                app:iconTint="@color/black" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/infoButton"
-                android:layout_width="@dimen/dp50"
-                android:layout_height="@dimen/dp50"
-                android:backgroundTint="@color/white"
-                android:contentDescription="@string/refreshButton"
-                android:textColor="@color/black"
                 app:icon="@drawable/buttn_info"
                 app:iconGravity="start"
-                app:iconSize="20dp"
-                app:iconTint="@color/black" />
+                app:iconSize="@dimen/button_icon_size"
+                app:iconTint="@color/black"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/refreshButton"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="TouchTargetSizeCheck" />
 
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/sceneGame"
@@ -126,5 +155,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/menu" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/toggleButton"
+        android:layout_width="@dimen/dp50"
+        android:layout_height="@dimen/dp50"
+        android:layout_margin="@dimen/dp10"
+        android:backgroundTint="@color/white"
+        android:contentDescription="@string/toggleButton"
+        android:textColor="@color/black"
+        app:icon="@drawable/ic_baseline_music_note_24"
+        app:iconGravity="start"
+        app:iconSize="@dimen/dp20"
+        app:iconTint="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

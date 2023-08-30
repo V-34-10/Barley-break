@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="sp14">14sp</dimen>
-    <dimen name="sp16">16sp</dimen>
+    <dimen name="text_size">16sp</dimen>
     <dimen name="dp5">5dp</dimen>
     <dimen name="dp20">20dp</dimen>
     <dimen name="dp2">2dp</dimen>
@@ -19,9 +19,11 @@
     <dimen name="dp4">4dp</dimen>
     <dimen name="dp16">16dp</dimen>
     <dimen name="dp75">75dp</dimen>
+    <dimen name="dp50">50dp</dimen>
     <dimen name="dp85">85dp</dimen>
     <dimen name="dp9">9dp</dimen>
-    <dimen name="dp50">50dp</dimen>
+    <dimen name="button_size">36dp</dimen>
+    <dimen name="button_icon_size">15dp</dimen>
     <dimen name="dp40">40dp</dimen>
     <dimen name="dp8">8dp</dimen>
     <dimen name="sp20">20sp</dimen>

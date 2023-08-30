@@ -1,5 +1,6 @@
 package com.brlea.barley_break.ui.main
 
+import android.media.MediaPlayer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -45,7 +46,8 @@ class TileAdapter(
         R.drawable.as_15,
         R.drawable.as_16
     ) // Expected positions of tiles
-
+    private var mediaPlayer: MediaPlayer = MediaPlayer.create(recyclerView.context, R.raw.stones)
+    private var isAudioPlaying = false
     fun setStartTime(startTime: Long) {
         this.startTime = startTime
     }
@@ -84,9 +86,16 @@ class TileAdapter(
                     moveListener.onMoveMade(moves)
                     animateTitleWithTimeAndMoves()
 
+                    isAudioPlaying = if (isAudioPlaying) {
+                        mediaPlayer.pause()
+                        false
+                    } else {
+                        mediaPlayer.start()
+                        true
+                    }
+
                 }
             }
-
         }
 
         private fun animateTitleWithTimeAndMoves() {
