@@ -54,7 +54,6 @@ class TileAdapter(
 
     fun updateMusicState(isMusicOn: Boolean) {
         this.isMusicOn = isMusicOn
-        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -100,10 +99,6 @@ class TileAdapter(
                     moveListener.onMoveMade(moves)
                     animateTitleWithTimeAndMoves()
 
-                    /*if (isMusicOn) {
-                        mediaPlayer.start()
-                    }*/
-
                     // Use Handler to delay the start of music playback
                     val playMusicHandler = Handler()
                     playMusicHandler.postDelayed({
@@ -124,8 +119,8 @@ class TileAdapter(
         private fun animateTitleWithTimeAndMoves() {
             // Animate the move count view
             moveCounter.animate()
-                .scaleX(1.1f)
-                .scaleY(1.1f)
+                .scaleX(1.2f)
+                .scaleY(1.2f)
                 .setDuration(500)
                 .setInterpolator(OvershootInterpolator())
                 .withEndAction {
