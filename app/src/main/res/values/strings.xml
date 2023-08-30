@@ -1,7 +1,10 @@
 <resources>
     <string name="app_name">Fifteen puzzle</string>
     <string name="time_title">Time: </string>
-    <string name="move_title">Move: </string>
+    <string name="move_title">Move: 0</string>
+    <string name="Move">Move: </string>
+    <string name="move_title_format">%s%d</string>
+    <string name="move_format">Move: %d</string>
     <string name="time">00:00:00</string>
     <string name="move">0</string>
     <string name="backButton">backButton</string>

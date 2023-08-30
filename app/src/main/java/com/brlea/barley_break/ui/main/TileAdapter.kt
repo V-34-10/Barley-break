@@ -21,7 +21,6 @@ class TileAdapter(
     private val recyclerView: RecyclerView,
     private val tileList: MutableList<Int>,
     private val moveCounter: TextView,
-    private val timeTitle: TextView,
     private val moveListener: MoveListener,
     private val dialogFragmentDismissListener: StartDialogFragment.DialogFragmentDismissListener
 ) : RecyclerView.Adapter<TileAdapter.ViewHolder>() {
@@ -78,12 +77,12 @@ class TileAdapter(
         private val updateTimeRunnable = object : Runnable {
             override fun run() {
                 (itemView.context as SceneActivity).updateElapsedTime(startTime)
-                handler.postDelayed(this, 1000)
+                handler.postDelayed(this, 100)
             }
         }
 
         init {
-            handler.postDelayed(updateTimeRunnable, 1000)
+            handler.postDelayed(updateTimeRunnable, 100)
         }
 
         fun bind(tileImageResource: Int) {
@@ -101,9 +100,19 @@ class TileAdapter(
                     moveListener.onMoveMade(moves)
                     animateTitleWithTimeAndMoves()
 
-                    if (isMusicOn) {
+                    /*if (isMusicOn) {
                         mediaPlayer.start()
-                    }
+                    }*/
+
+                    // Use Handler to delay the start of music playback
+                    val playMusicHandler = Handler()
+                    playMusicHandler.postDelayed({
+                        if (isMusicOn) {
+                            mediaPlayer.stop() // Stop the current playback
+                            mediaPlayer.prepare() // Prepare the player for playback
+                            mediaPlayer.start() // Start playing the sound again
+                        }
+                    }, 10) // Adjust the delay time as needed
                 }
             }
         }
@@ -113,22 +122,6 @@ class TileAdapter(
         }
 
         private fun animateTitleWithTimeAndMoves() {
-            // Animate the title time view
-            timeTitle.animate()
-                .scaleX(1.1f)
-                .scaleY(1.1f)
-                .setDuration(500)
-                .setInterpolator(OvershootInterpolator())
-                .withEndAction {
-                    // After scaling up, animate back to the original size
-                    timeTitle.animate()
-                        .scaleX(1f)
-                        .scaleY(1f)
-                        .setDuration(300)
-                        .start()
-                }
-                .start()
-
             // Animate the move count view
             moveCounter.animate()
                 .scaleX(1.1f)

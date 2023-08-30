@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.GridLayoutManager
 import com.brlea.barley_break.R
 import com.brlea.barley_break.ui.dialog.InfoDialogFragment
@@ -103,7 +102,6 @@ class SceneActivity : AppCompatActivity(), MoveListener,
                 sceneGame,
                 (tileImagesOriginal + R.drawable.as_16) as MutableList<Int>,
                 move_value,
-                time_value,
                 this,
                 this
             )
@@ -138,7 +136,6 @@ class SceneActivity : AppCompatActivity(), MoveListener,
             sceneGame,
             (tileImagesShuffle + R.drawable.as_16) as MutableList<Int>,
             move_value,
-            time_value,
             this,
             this
         )
@@ -191,7 +188,8 @@ class SceneActivity : AppCompatActivity(), MoveListener,
 
     override fun onMoveMade(moveCount: Int) {
         this.moveCount = moveCount
-        move_value.text = moveCount.toString()
+        val formattedMoveTitle = getString(R.string.move_title_format, getString(R.string.move), moveCount)
+        move_value.text = formattedMoveTitle
     }
 
     override fun onDestroy() {
@@ -205,7 +203,8 @@ class SceneActivity : AppCompatActivity(), MoveListener,
 
         // Reset time, move, toggleButton
         moveCount = 0
-        move_value.text = moveCount.toString()
+        val formattedMoveCount = getString(R.string.move_format, moveCount)
+        move_value.text = formattedMoveCount
         time_value.text = getString(R.string.time)
         toggleButton.setIconResource(R.drawable.ic_baseline_music_note_24)
         // Reset adapter and recycler view

@@ -7,7 +7,7 @@
     <ImageView
         android:id="@+id/imagePart"
         android:layout_width="@dimen/dp100"
-        android:layout_height="@dimen/dp110"
+        android:layout_height="@dimen/dp100"
         android:contentDescription="@string/app_name"
         android:src="@drawable/as_1"
         app:layout_constraintBottom_toBottomOf="parent"
