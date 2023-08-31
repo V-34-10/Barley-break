@@ -1,7 +1,6 @@
 package com.brlea.barley_break.ui.main.game
 
 import android.content.pm.PackageManager
-import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -15,18 +14,12 @@ import com.brlea.barley_break.ui.dialog.InfoDialogFragment
 import com.brlea.barley_break.ui.dialog.StartDialogFragment
 import com.brlea.barley_break.ui.dialog.VictoryDialogFragment
 import kotlinx.android.synthetic.main.activity_scene.*
-import java.util.*
 import java.util.concurrent.TimeUnit
 
 class SceneActivity : AppCompatActivity(), MoveListener,
     StartDialogFragment.DialogFragmentDismissListener,
     VictoryDialogFragment.DialogFragmentDismissListener {
-
     private var moveCount = 0
-    private lateinit var mediaPlayer: MediaPlayer
-    private val musicTracks =
-        listOf(R.raw.asia, R.raw.dream, R.raw.wow, R.raw.happylife, R.raw.electrodoodle)
-    private var currentMusicIndex = 0
     private var tileImagesOriginal = mutableListOf(
         R.drawable.as_1,
         R.drawable.as_2,
@@ -44,7 +37,23 @@ class SceneActivity : AppCompatActivity(), MoveListener,
         R.drawable.as_14,
         R.drawable.as_15
     )
-    private var tileImagesShuffle = mutableListOf(tileImagesOriginal)
+    private var tileImagesShuffle = mutableListOf(
+        R.drawable.as_1,
+        R.drawable.as_2,
+        R.drawable.as_3,
+        R.drawable.as_4,
+        R.drawable.as_5,
+        R.drawable.as_6,
+        R.drawable.as_7,
+        R.drawable.as_8,
+        R.drawable.as_9,
+        R.drawable.as_10,
+        R.drawable.as_11,
+        R.drawable.as_12,
+        R.drawable.as_13,
+        R.drawable.as_14,
+        R.drawable.as_15
+    )
     private var isMusicOn = true
     private lateinit var tileAdapter: TileAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -104,13 +113,10 @@ class SceneActivity : AppCompatActivity(), MoveListener,
         toggleButton.setOnClickListener {
             isMusicOn = if (isMusicOn) {
                 toggleButton.startAnimation(animation)
-                /*mediaPlayer.stop()
-                mediaPlayer = MediaPlayer.create(this, getRandomMusicTrack())*/
                 toggleButton.setIconResource(R.drawable.ic_baseline_music_off_24)
                 false
             } else {
                 toggleButton.startAnimation(animation)
-                //mediaPlayer.start()
                 toggleButton.setIconResource(R.drawable.ic_baseline_music_note_24)
                 true
             }
@@ -136,13 +142,6 @@ class SceneActivity : AppCompatActivity(), MoveListener,
         }
     }
 
-    private fun initMedia() {
-        // Initialize the MediaPlayer with the background music
-        mediaPlayer = MediaPlayer.create(this, getRandomMusicTrack())
-        mediaPlayer.isLooping = true
-        mediaPlayer.start()
-    }
-
     private fun startDialog() {
         // Show the Start Game dialog
         val startGameDialog = StartDialogFragment()
@@ -153,13 +152,6 @@ class SceneActivity : AppCompatActivity(), MoveListener,
     override fun onDialogDismissed() {
         // The dialog has been dismissed, you can start the main game session here
         initRecycler()
-        //initMedia()
-    }
-
-    private fun getRandomMusicTrack(): Int {
-        val randomIndex = Random().nextInt(musicTracks.size)
-        currentMusicIndex = randomIndex
-        return musicTracks[randomIndex]
     }
 
     fun updateElapsedTime(startTime: Long) {
@@ -181,15 +173,7 @@ class SceneActivity : AppCompatActivity(), MoveListener,
         move_value.text = formattedMoveTitle
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        //mediaPlayer.release()
-    }
-
     override fun onRestartClicked() {
-        // Release the media player
-        //mediaPlayer.release()
-
         // Reset time, move, toggleButton
         moveCount = 0
         val formattedMoveCount = getString(R.string.move_format, moveCount)

@@ -3,6 +3,7 @@ package com.brlea.barley_break.ui.main.webview
 import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
+import android.view.View
 import android.webkit.WebResourceError
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
@@ -21,6 +22,7 @@ class WebViewActivity : AppCompatActivity() {
     }
 
     private fun initWebView() {
+        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
         WebViewShow = findViewById(R.id.WebViewShow)
         WebViewShow.webViewClient = WebViewClient()
         WebViewShow.settings.apply {
@@ -50,9 +52,10 @@ class WebViewActivity : AppCompatActivity() {
         val remoteConfig = FirebaseRemoteConfig.getInstance()
         remoteConfig.fetch().addOnCompleteListener(this) { task ->
             if (task.isSuccessful) {
-                remoteConfig.activate()
-                mainLink = remoteConfig.getString("mainLink")
-                initWebView()
+                remoteConfig.activate().addOnSuccessListener {
+                    mainLink = remoteConfig.getString("mainLink")
+                    initWebView()
+                }
             }
         }
     }
