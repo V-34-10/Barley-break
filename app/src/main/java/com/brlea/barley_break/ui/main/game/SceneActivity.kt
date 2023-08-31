@@ -1,11 +1,14 @@
-package com.brlea.barley_break.ui.main
+package com.brlea.barley_break.ui.main.game
 
+import android.content.pm.PackageManager
 import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import com.brlea.barley_break.R
 import com.brlea.barley_break.ui.dialog.InfoDialogFragment
@@ -24,23 +27,6 @@ class SceneActivity : AppCompatActivity(), MoveListener,
     private val musicTracks =
         listOf(R.raw.asia, R.raw.dream, R.raw.wow, R.raw.happylife, R.raw.electrodoodle)
     private var currentMusicIndex = 0
-    private var tileImagesShuffle = mutableListOf(
-        R.drawable.as_1,
-        R.drawable.as_2,
-        R.drawable.as_3,
-        R.drawable.as_4,
-        R.drawable.as_5,
-        R.drawable.as_6,
-        R.drawable.as_7,
-        R.drawable.as_8,
-        R.drawable.as_9,
-        R.drawable.as_10,
-        R.drawable.as_11,
-        R.drawable.as_12,
-        R.drawable.as_13,
-        R.drawable.as_14,
-        R.drawable.as_15
-    )
     private var tileImagesOriginal = mutableListOf(
         R.drawable.as_1,
         R.drawable.as_2,
@@ -58,6 +44,7 @@ class SceneActivity : AppCompatActivity(), MoveListener,
         R.drawable.as_14,
         R.drawable.as_15
     )
+    private var tileImagesShuffle = mutableListOf(tileImagesOriginal)
     private var isMusicOn = true
     private lateinit var tileAdapter: TileAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,6 +52,7 @@ class SceneActivity : AppCompatActivity(), MoveListener,
         setContentView(R.layout.activity_scene)
         startDialog()
         controlPanel()
+        initNotification()
     }
 
     private fun controlPanel() {
@@ -113,7 +101,7 @@ class SceneActivity : AppCompatActivity(), MoveListener,
             }
         }
 
-        toggleButton.setOnClickListener{
+        toggleButton.setOnClickListener {
             isMusicOn = if (isMusicOn) {
                 toggleButton.startAnimation(animation)
                 /*mediaPlayer.stop()
@@ -188,7 +176,8 @@ class SceneActivity : AppCompatActivity(), MoveListener,
 
     override fun onMoveMade(moveCount: Int) {
         this.moveCount = moveCount
-        val formattedMoveTitle = getString(R.string.move_title_format, getString(R.string.move), moveCount)
+        val formattedMoveTitle =
+            getString(R.string.move_title_format, getString(R.string.move), moveCount)
         move_value.text = formattedMoveTitle
     }
 
@@ -232,5 +221,31 @@ class SceneActivity : AppCompatActivity(), MoveListener,
         if (hasFocus) {
             hideSystemUI()
         }
+    }
+
+    private fun initNotification() {
+        // Check if we already have notification permission
+        if (!isNotificationPermissionGranted()) {
+            // If there is no permission, then we ask the user
+            requestNotificationPermission()
+        }
+    }
+
+    private fun isNotificationPermissionGranted(): Boolean {
+        // Перевіряємо, чи маємо ми дозвіл на сповіщення
+        return ContextCompat.checkSelfPermission(
+            this,
+            "com.google.android.c2dm.permission.RECEIVE"
+        ) == PackageManager.PERMISSION_GRANTED
+    }
+
+    private fun requestNotificationPermission() {
+        val notificationPermissionCode = 123
+        // Запитуємо дозвіл на сповіщення
+        ActivityCompat.requestPermissions(
+            this,
+            arrayOf("com.google.android.c2dm.permission.RECEIVE"),
+            notificationPermissionCode
+        )
     }
 }

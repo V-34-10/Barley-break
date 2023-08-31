@@ -1,4 +1,4 @@
-package com.brlea.barley_break.ui.main
+package com.brlea.barley_break.ui.main.game
 
 import android.media.MediaPlayer
 import android.os.Handler
@@ -46,7 +46,6 @@ class TileAdapter(
         R.drawable.as_15,
         R.drawable.as_16
     ) // Expected positions of tiles
-    private var mediaPlayer: MediaPlayer = MediaPlayer.create(recyclerView.context, R.raw.stones)
     private var isMusicOn = true
     fun setStartTime(startTime: Long) {
         this.startTime = startTime
@@ -73,6 +72,7 @@ class TileAdapter(
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val imageView: ImageView = itemView.findViewById(R.id.imagePart)
         private val handler = Handler()
+        private val playMusicHandler = Handler()
         private val updateTimeRunnable = object : Runnable {
             override fun run() {
                 (itemView.context as SceneActivity).updateElapsedTime(startTime)
@@ -100,20 +100,25 @@ class TileAdapter(
                     animateTitleWithTimeAndMoves()
 
                     // Use Handler to delay the start of music playback
-                    val playMusicHandler = Handler()
                     playMusicHandler.postDelayed({
                         if (isMusicOn) {
-                            mediaPlayer.stop() // Stop the current playback
-                            mediaPlayer.prepare() // Prepare the player for playback
-                            mediaPlayer.start() // Start playing the sound again
+                            val newMediaPlayer = MediaPlayer.create(
+                                recyclerView.context,
+                                R.raw.stones
+                            )
+                            newMediaPlayer.setOnCompletionListener {
+                                it.release() // Release the MediaPlayer once playback is complete
+                            }
+                            newMediaPlayer.start()
                         }
-                    }, 10) // Adjust the delay time as needed
+                    }, 100) // Adjust the delay time as needed
                 }
             }
         }
 
         fun recycle() {
             handler.removeCallbacks(updateTimeRunnable)
+            playMusicHandler.removeCallbacksAndMessages(null)
         }
 
         private fun animateTitleWithTimeAndMoves() {

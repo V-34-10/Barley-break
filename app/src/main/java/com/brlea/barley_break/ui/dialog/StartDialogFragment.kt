@@ -5,7 +5,6 @@ import android.app.Dialog
 import android.os.Bundle
 import androidx.fragment.app.DialogFragment
 import com.brlea.barley_break.R
-import com.brlea.barley_break.ui.main.SceneActivity
 
 class StartDialogFragment : DialogFragment() {
 
