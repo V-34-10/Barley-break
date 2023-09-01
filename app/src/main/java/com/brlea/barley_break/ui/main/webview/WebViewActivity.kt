@@ -33,19 +33,22 @@ class WebViewActivity : AppCompatActivity() {
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
-        if (event.getAction() === KeyEvent.ACTION_DOWN) {
+        if (event.action == KeyEvent.ACTION_DOWN) {
             when (keyCode) {
                 KeyEvent.KEYCODE_BACK -> {
                     if (WebViewShow.canGoBack()) {
                         WebViewShow.goBack()
-                    } else {
-                        finish()
+                        return true
                     }
-                    return true
                 }
             }
         }
         return super.onKeyDown(keyCode, event)
+    }
+
+    @Deprecated("Deprecated in Java")
+    override fun onBackPressed() {
+        // no close activity
     }
 
     private fun setRemoteLink() {

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Fifteen puzzle</string>
+    <string name="app_name">Gilded Fish</string>
     <string name="time_title">Time: </string>
     <string name="move_title">Move: 0</string>
     <string name="Move">Move: </string>
@@ -22,4 +22,5 @@
         <br>Good luck!</br></string>
     <string name="okButton">Go</string>
     <string name="toggleButton">toggleButton</string>
+    <string name="nameUser">USERNAME</string>
 </resources>

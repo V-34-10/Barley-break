@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/scene_screen"
+    android:background="@drawable/back_menu"
     tools:context=".ui.main.game.SceneActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -173,9 +173,9 @@
         android:id="@+id/sceneGame"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/section_background"
+        android:background="@drawable/back_frame"
         android:orientation="vertical"
-        android:padding="@dimen/dp15"
+        android:padding="@dimen/dp50"
         android:scaleType="centerCrop"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
