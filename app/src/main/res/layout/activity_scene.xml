@@ -8,194 +8,193 @@
     tools:context=".ui.main.game.SceneActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/menu"
+        android:id="@+id/control_top_panel"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp100"
-        android:layout_gravity="top"
-        android:layout_margin="@dimen/dp5"
-        android:background="@drawable/rectangle_menu"
-        android:orientation="horizontal"
+        android:layout_height="@dimen/dp0"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/leftPart"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="vertical"
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/exit_Button"
+            android:layout_width="@dimen/button_menu_size"
+            android:layout_height="@dimen/button_menu_size"
+            android:layout_marginStart="25dp"
+            android:background="@color/background_transparent"
+            android:contentDescription="@string/exitButton"
+            app:icon="@drawable/but_exit"
+            app:iconGravity="start"
+            app:iconSize="@dimen/button_menu_icon_size"
+            app:iconTint="@color/Triadic"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="DuplicateSpeakableTextCheck" />
 
-            <TextView
-                android:id="@+id/time_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/dp5"
-                android:fontFamily="@font/montserrat_semibold_italic"
-                android:text="@string/time_title"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                android:textSize="@dimen/text_size"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/time_value"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/dp5"
-                android:fontFamily="@font/montserrat_semibold_italic"
-                android:text="@string/time"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                android:textSize="@dimen/text_size"
-                app:layout_constraintStart_toEndOf="@+id/time_title"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/move_value"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_margin="@dimen/dp5"
-                android:fontFamily="@font/montserrat_semibold_italic"
-                android:text="@string/move"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                android:textSize="@dimen/text_size"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/move_titles"
-                app:layout_constraintTop_toBottomOf="@+id/time_title" />
-
-            <TextView
-                android:id="@+id/move_titles"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/dp5"
-                android:fontFamily="@font/montserrat_semibold_italic"
-                android:text="@string/Move"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                android:textSize="@dimen/text_size"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/time_title" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/controlPart"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/dp0"
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/info_Button"
+            android:layout_width="@dimen/button_menu_size"
+            android:layout_height="@dimen/button_menu_size"
+            android:layout_marginEnd="25dp"
+            android:background="@color/background_transparent"
+            android:contentDescription="@string/infoButton"
+            app:icon="@drawable/but_info"
+            app:iconGravity="start"
+            app:iconSize="@dimen/button_menu_icon_size"
+            app:iconTint="@color/Triadic"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toEndOf="@+id/leftPart"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/exitButton"
-                android:layout_width="@dimen/button_size"
-                android:layout_height="@dimen/button_size"
-                android:layout_marginStart="@dimen/dp5"
-                android:backgroundTint="@color/white"
-                android:contentDescription="@string/exitButton"
-                android:textColor="@color/black"
-                app:icon="@drawable/buttn_exit"
-                app:iconGravity="start"
-                app:iconSize="@dimen/button_icon_size"
-                app:iconTint="@color/black"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="TouchTargetSizeCheck" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/finishedButton"
-                android:layout_width="@dimen/button_size"
-                android:layout_height="@dimen/button_size"
-                android:layout_marginStart="@dimen/dp5"
-                android:backgroundTint="@color/white"
-                android:contentDescription="@string/backButton"
-                android:textColor="@color/black"
-                app:icon="@drawable/ic_baseline_assignment_turned_in_24"
-                app:iconGravity="start"
-                app:iconSize="@dimen/button_icon_size"
-                app:iconTint="@color/black"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/exitButton"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="TouchTargetSizeCheck" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/refreshButton"
-                android:layout_width="@dimen/button_size"
-                android:layout_height="@dimen/button_size"
-                android:layout_marginStart="@dimen/dp5"
-                android:backgroundTint="@color/white"
-                android:contentDescription="@string/refreshButton"
-                android:textColor="@color/black"
-                app:icon="@drawable/buttn_refresh"
-                app:iconGravity="start"
-                app:iconSize="@dimen/button_icon_size"
-                app:iconTint="@color/black"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/finishedButton"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="TouchTargetSizeCheck" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/infoButton"
-                android:layout_width="@dimen/button_size"
-                android:layout_height="@dimen/button_size"
-                android:layout_marginStart="@dimen/dp5"
-                android:layout_marginEnd="@dimen/dp5"
-                android:backgroundTint="@color/white"
-                android:contentDescription="@string/infoButton"
-                android:textColor="@color/black"
-                app:icon="@drawable/buttn_info"
-                app:iconGravity="start"
-                app:iconSize="@dimen/button_icon_size"
-                app:iconTint="@color/black"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/refreshButton"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="TouchTargetSizeCheck" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="DuplicateSpeakableTextCheck" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/sceneGame"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/back_frame"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/user_time"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
         android:orientation="vertical"
-        android:padding="@dimen/dp50"
-        android:scaleType="centerCrop"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/menu" />
+        app:layout_constraintTop_toBottomOf="@+id/control_top_panel">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/toggleButton"
-        android:layout_width="@dimen/dp50"
-        android:layout_height="@dimen/dp50"
-        android:layout_margin="@dimen/dp10"
-        android:backgroundTint="@color/white"
-        android:contentDescription="@string/toggleButton"
-        android:textColor="@color/black"
-        app:icon="@drawable/ic_baseline_music_note_24"
-        app:iconGravity="start"
-        app:iconSize="@dimen/dp20"
-        app:iconTint="@color/black"
+        <View
+            android:id="@+id/view_timer_user_line"
+            android:layout_width="@dimen/dp150"
+            android:layout_height="@dimen/dp3"
+            android:background="@drawable/back_timer_user_line"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/time_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp5"
+            android:fontFamily="@font/actor"
+            android:text="@string/time"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view_timer_user_line" />
+
+        <TextView
+            android:id="@+id/user_name_nick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp5"
+            android:fontFamily="@font/actor"
+            android:text="@string/nameUser"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/view_timer_user_line"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/puzzle"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        app:layout_constraintBottom_toTopOf="@+id/control_bottom_panel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/user_time">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="@dimen/dp100"
+            android:layout_height="@dimen/dp100"
+            android:contentDescription="@string/preview"
+            android:src="@drawable/back_image_preview"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </ImageView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/sceneGame"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/back_frame"
+            android:orientation="vertical"
+            android:padding="@dimen/dp50"
+            android:layout_gravity="center"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/control_bottom_panel"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dp0"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/back_Button"
+            android:layout_width="@dimen/button_menu_size"
+            android:layout_height="@dimen/button_menu_size"
+            android:layout_marginStart="25dp"
+            android:background="@color/background_transparent"
+            android:contentDescription="@string/exitButton"
+            app:icon="@drawable/but_turn_back"
+            app:iconGravity="start"
+            app:iconSize="@dimen/button_menu_icon_size"
+            app:iconTint="@color/Triadic"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/toggle_Button"
+            android:layout_width="@dimen/button_menu_size"
+            android:layout_height="@dimen/button_menu_size"
+            android:layout_marginStart="25dp"
+            android:background="@color/background_transparent"
+            android:contentDescription="@string/infoButton"
+            app:icon="@drawable/but_sound_on"
+            app:iconGravity="start"
+            app:iconSize="@dimen/button_menu_icon_size"
+            app:iconTint="@color/Triadic"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/back_Button"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/refresh_Button"
+            android:layout_width="@dimen/button_menu_size"
+            android:layout_height="@dimen/button_menu_size"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="25dp"
+            android:background="@color/background_transparent"
+            android:contentDescription="@string/toggleButton"
+            app:icon="@drawable/but_turn_refresh"
+            app:iconGravity="start"
+            app:iconSize="@dimen/button_menu_icon_size"
+            app:iconTint="@color/Triadic"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/toggle_Button"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

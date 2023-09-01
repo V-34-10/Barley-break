@@ -23,4 +23,5 @@
     <string name="okButton">Go</string>
     <string name="toggleButton">toggleButton</string>
     <string name="nameUser">USERNAME</string>
+    <string name="preview">previewImage</string>
 </resources>

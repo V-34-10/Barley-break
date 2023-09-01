@@ -47,6 +47,7 @@
             android:autofillHints="name"
             android:background="@drawable/back_username_tab"
             android:hint="@string/nameUser"
+            android:text="@string/nameUser"
             android:inputType="textPersonName"
             android:maxLength="10"
             android:textAlignment="center"

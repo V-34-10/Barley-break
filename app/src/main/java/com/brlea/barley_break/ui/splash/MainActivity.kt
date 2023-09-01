@@ -9,7 +9,7 @@ import android.os.Handler
 import android.telephony.TelephonyManager
 import android.view.View
 import com.brlea.barley_break.R
-import com.brlea.barley_break.ui.main.game.SceneActivity
+import com.brlea.barley_break.ui.main.game.MenuActivity
 import com.brlea.barley_break.ui.main.webview.WebViewActivity
 
 class MainActivity : AppCompatActivity() {
@@ -27,8 +27,8 @@ class MainActivity : AppCompatActivity() {
                 startActivity(go)
                 finish()
             } else {
-                // run SceneActivity
-                val go = Intent(this@MainActivity, SceneActivity::class.java)
+                // run MenuActivity
+                val go = Intent(this@MainActivity, MenuActivity::class.java)
                 startActivity(go)
                 finish()
             }

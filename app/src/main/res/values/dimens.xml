@@ -4,4 +4,7 @@
     <dimen name="dp275">275dp</dimen>
     <dimen name="sp35">35sp</dimen>
     <dimen name="sp45">45sp</dimen>
+    <dimen name="dp3">3dp</dimen>
+    <dimen name="dp45">45dp</dimen>
+    <dimen name="dp35">35dp</dimen>
 </resources>

@@ -2,7 +2,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -16,7 +15,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/exit_Button"
+            android:id="@+id/exitButton"
             android:layout_width="@dimen/button_menu_size"
             android:layout_height="@dimen/button_menu_size"
             android:layout_marginStart="@dimen/dp5"
@@ -31,7 +30,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/info_Button"
+            android:id="@+id/infoButton"
             android:layout_width="@dimen/button_menu_size"
             android:layout_height="@dimen/button_menu_size"
             android:layout_marginStart="@dimen/dp5"
@@ -42,11 +41,11 @@
             app:iconSize="@dimen/button_menu_icon_size"
             app:iconTint="@color/Triadic"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/exit_Button"
+            app:layout_constraintStart_toEndOf="@+id/exitButton"
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/toggle_Button"
+            android:id="@+id/toggleButton"
             android:layout_width="@dimen/button_menu_size"
             android:layout_height="@dimen/button_menu_size"
             android:layout_marginStart="5dp"
@@ -59,7 +58,7 @@
             app:iconTint="@color/Triadic"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/info_Button"
+            app:layout_constraintStart_toEndOf="@+id/infoButton"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -31,7 +31,7 @@ class MenuActivity : AppCompatActivity() {
 
     private fun controlPanel() {
         val animation = AnimationUtils.loadAnimation(this, R.anim.scale_up)
-        exit_Button.setOnClickListener {
+        exitButton.setOnClickListener {
             animation.setAnimationListener(object : Animation.AnimationListener {
                 override fun onAnimationStart(animation: Animation?) {
                 }
@@ -47,23 +47,24 @@ class MenuActivity : AppCompatActivity() {
             exitButton.startAnimation(animation)
         }
 
-        info_Button.setOnClickListener {
+        infoButton.setOnClickListener {
             infoButton.startAnimation(animation)
             setRemoteLink()
         }
 
-        toggle_Button.setOnClickListener {
+        toggleButton.setOnClickListener {
             isMusicOn = if (isMusicOn) {
-                toggle_Button.startAnimation(animation)
+                toggleButton.startAnimation(animation)
                 false
             } else {
-                toggle_Button.startAnimation(animation)
+                toggleButton.startAnimation(animation)
                 true
             }
             tileAdapter.updateMusicState(isMusicOn)
         }
 
         playButton.setOnClickListener{
+            playButton.startAnimation(animation)
             loadingNextActivity()
         }
     }

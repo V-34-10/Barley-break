@@ -12,5 +12,5 @@
     <color name="silver">#3B3B3B</color>
     <color name="Triadic">#e0c0e4</color>
     <color name="background_button">#01004E</color>
-    <color name="background_transparent">000000FF</color>
+    <color name="background_transparent">#000000FF</color>
 </resources>

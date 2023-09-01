@@ -20,30 +20,30 @@ import kotlin.math.abs
 class TileAdapter(
     private val recyclerView: RecyclerView,
     private val tileList: MutableList<Int>,
-    private val moveCounter: TextView,
-    private val moveListener: MoveListener,
+    //private val moveCounter: TextView,
+    //private val moveListener: MoveListener,
     private val dialogFragmentDismissListener: StartDialogFragment.DialogFragmentDismissListener
 ) : RecyclerView.Adapter<TileAdapter.ViewHolder>() {
 
     private var emptyPosition: Int = tileList.size - 1
-    private var moves = 0
+    //private var moves = 0
     private var startTime: Long = 0 // Initialize the startTime property
     private val correctTilePositions: List<Int> = listOf(
-        R.drawable.as_1,
-        R.drawable.as_2,
-        R.drawable.as_3,
-        R.drawable.as_4,
-        R.drawable.as_5,
-        R.drawable.as_6,
-        R.drawable.as_7,
-        R.drawable.as_8,
-        R.drawable.as_9,
-        R.drawable.as_10,
-        R.drawable.as_11,
-        R.drawable.as_12,
-        R.drawable.as_13,
-        R.drawable.as_14,
-        R.drawable.as_15,
+        R.drawable.cub_1,
+        R.drawable.cub_2,
+        R.drawable.cub_3,
+        R.drawable.cub_4,
+        R.drawable.cub_5,
+        R.drawable.cub_6,
+        R.drawable.cub_7,
+        R.drawable.cub_8,
+        R.drawable.cub_9,
+        R.drawable.cub_10,
+        R.drawable.cub_11,
+        R.drawable.cub_12,
+        R.drawable.cub_13,
+        R.drawable.cub_14,
+        R.drawable.cub_15,
         R.drawable.as_16
     ) // Expected positions of tiles
     private var isMusicOn = true
@@ -62,7 +62,7 @@ class TileAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(tileList[position])
-        moveCounter.text = moves.toString()
+        //moveCounter.text = moves.toString()
     }
 
     override fun getItemCount(): Int {
@@ -88,16 +88,16 @@ class TileAdapter(
             imageView.setImageResource(tileImageResource)
             itemView.setOnClickListener {
                 if (canMove(bindingAdapterPosition)) {
-                    moves++
-                    moveCounter.text = moves.toString()
+                    /*moves++
+                    moveCounter.text = moves.toString()*/
                     swapTiles(bindingAdapterPosition, emptyPosition)
                     notifyItemChanged(bindingAdapterPosition)
                     notifyItemChanged(emptyPosition)
                     emptyPosition = bindingAdapterPosition
 
                     // Notify the activity of the move
-                    moveListener.onMoveMade(moves)
-                    animateTitleWithTimeAndMoves()
+                    /*moveListener.onMoveMade(moves)
+                    animateTitleWithTimeAndMoves()*/
 
                     // Use Handler to delay the start of music playback
                     playMusicHandler.postDelayed({
@@ -121,7 +121,7 @@ class TileAdapter(
             playMusicHandler.removeCallbacksAndMessages(null)
         }
 
-        private fun animateTitleWithTimeAndMoves() {
+        /*private fun animateTitleWithTimeAndMoves() {
             // Animate the move count view
             moveCounter.animate()
                 .scaleX(1.2f)
@@ -137,7 +137,7 @@ class TileAdapter(
                         .start()
                 }
                 .start()
-        }
+        }*/
     }
 
     init {

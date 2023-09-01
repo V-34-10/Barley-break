@@ -29,7 +29,7 @@
         android:theme="@style/Theme.Barleybreak"
         tools:targetApi="31">
         <activity
-            android:name=".MenuActivity"
+            android:name=".ui.main.game.MenuActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

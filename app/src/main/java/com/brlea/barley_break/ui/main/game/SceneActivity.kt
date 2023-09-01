@@ -1,6 +1,8 @@
 package com.brlea.barley_break.ui.main.game
 
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -13,6 +15,7 @@ import com.brlea.barley_break.R
 import com.brlea.barley_break.ui.dialog.InfoDialogFragment
 import com.brlea.barley_break.ui.dialog.StartDialogFragment
 import com.brlea.barley_break.ui.dialog.VictoryDialogFragment
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import kotlinx.android.synthetic.main.activity_scene.*
 import java.util.concurrent.TimeUnit
 
@@ -20,53 +23,56 @@ class SceneActivity : AppCompatActivity(), MoveListener,
     StartDialogFragment.DialogFragmentDismissListener,
     VictoryDialogFragment.DialogFragmentDismissListener {
     private var moveCount = 0
-    private var tileImagesOriginal = mutableListOf(
-        R.drawable.as_1,
-        R.drawable.as_2,
-        R.drawable.as_3,
-        R.drawable.as_4,
-        R.drawable.as_5,
-        R.drawable.as_6,
-        R.drawable.as_7,
-        R.drawable.as_8,
-        R.drawable.as_9,
-        R.drawable.as_10,
-        R.drawable.as_11,
-        R.drawable.as_12,
-        R.drawable.as_13,
-        R.drawable.as_14,
-        R.drawable.as_15
-    )
+
+    /*private var tileImagesOriginal = mutableListOf(
+        R.drawable.cub_1,
+        R.drawable.cub_2,
+        R.drawable.cub_3,
+        R.drawable.cub_4,
+        R.drawable.cub_5,
+        R.drawable.cub_6,
+        R.drawable.cub_7,
+        R.drawable.cub_8,
+        R.drawable.cub_9,
+        R.drawable.cub_10,
+        R.drawable.cub_11,
+        R.drawable.cub_12,
+        R.drawable.cub_13,
+        R.drawable.cub_14,
+        R.drawable.cub_15
+    )*/
     private var tileImagesShuffle = mutableListOf(
-        R.drawable.as_1,
-        R.drawable.as_2,
-        R.drawable.as_3,
-        R.drawable.as_4,
-        R.drawable.as_5,
-        R.drawable.as_6,
-        R.drawable.as_7,
-        R.drawable.as_8,
-        R.drawable.as_9,
-        R.drawable.as_10,
-        R.drawable.as_11,
-        R.drawable.as_12,
-        R.drawable.as_13,
-        R.drawable.as_14,
-        R.drawable.as_15
+        R.drawable.cub_1,
+        R.drawable.cub_2,
+        R.drawable.cub_3,
+        R.drawable.cub_4,
+        R.drawable.cub_5,
+        R.drawable.cub_6,
+        R.drawable.cub_7,
+        R.drawable.cub_8,
+        R.drawable.cub_9,
+        R.drawable.cub_10,
+        R.drawable.cub_11,
+        R.drawable.cub_12,
+        R.drawable.cub_13,
+        R.drawable.cub_14,
+        R.drawable.cub_15
     )
     private var isMusicOn = true
     private lateinit var tileAdapter: TileAdapter
+    private lateinit var policyLink: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_scene)
         startDialog()
         controlPanel()
         initNotification()
+        getNameUser()
     }
 
     private fun controlPanel() {
         val animation = AnimationUtils.loadAnimation(this, R.anim.scale_up)
-        exitButton.setOnClickListener {
+        exit_Button.setOnClickListener {
             animation.setAnimationListener(object : Animation.AnimationListener {
                 override fun onAnimationStart(animation: Animation?) {
                 }
@@ -79,21 +85,22 @@ class SceneActivity : AppCompatActivity(), MoveListener,
                 }
             })
 
-            exitButton.startAnimation(animation)
+            exit_Button.startAnimation(animation)
         }
 
-        refreshButton.setOnClickListener {
-            refreshButton.startAnimation(animation)
+        refresh_Button.setOnClickListener {
+            refresh_Button.startAnimation(animation)
             onRestartClicked()
         }
 
-        infoButton.setOnClickListener {
-            infoButton.startAnimation(animation)
-            val infoGameDialog = InfoDialogFragment()
-            infoGameDialog.show(supportFragmentManager, "info_game_dialog")
+        info_Button.setOnClickListener {
+            info_Button.startAnimation(animation)
+            /*val infoGameDialog = InfoDialogFragment()
+            infoGameDialog.show(supportFragmentManager, "info_game_dialog")*/
+            setRemoteLink()
         }
 
-        finishedButton.setOnClickListener {
+        /*finishedButton.setOnClickListener {
             finishedButton.startAnimation(animation)
             tileAdapter = TileAdapter(
                 sceneGame,
@@ -108,20 +115,42 @@ class SceneActivity : AppCompatActivity(), MoveListener,
                 layoutManager = GridLayoutManager(this@SceneActivity, 4)
                 this.adapter = tileAdapter
             }
+        }*/
+
+        back_Button.setOnClickListener {
+            val go = Intent(this@SceneActivity, MenuActivity::class.java)
+            startActivity(go)
+            finish()
         }
 
-        toggleButton.setOnClickListener {
+        toggle_Button.setOnClickListener {
             isMusicOn = if (isMusicOn) {
-                toggleButton.startAnimation(animation)
-                toggleButton.setIconResource(R.drawable.ic_baseline_music_off_24)
+                toggle_Button.startAnimation(animation)
                 false
             } else {
-                toggleButton.startAnimation(animation)
-                toggleButton.setIconResource(R.drawable.ic_baseline_music_note_24)
+                toggle_Button.startAnimation(animation)
                 true
             }
             tileAdapter.updateMusicState(isMusicOn)
         }
+    }
+
+    private fun setRemoteLink() {
+        val remoteConfig = FirebaseRemoteConfig.getInstance()
+        remoteConfig.fetch().addOnCompleteListener(this) { task ->
+            if (task.isSuccessful) {
+                remoteConfig.activate().addOnSuccessListener {
+                    policyLink = remoteConfig.getString("policy_link")
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(policyLink))
+                    startActivity(intent)
+                }
+            }
+        }
+    }
+
+    private fun getNameUser() {
+        val username = intent.getStringExtra("username")
+        user_name_nick.text = username ?: "USERNAME"
     }
 
     private fun initRecycler() {
@@ -129,8 +158,8 @@ class SceneActivity : AppCompatActivity(), MoveListener,
         tileAdapter = TileAdapter(
             sceneGame,
             (tileImagesShuffle + R.drawable.as_16) as MutableList<Int>,
-            move_value,
-            this,
+            //move_value,
+            //this,
             this
         )
         tileAdapter.setStartTime(System.currentTimeMillis()) // Set the start time
@@ -168,18 +197,17 @@ class SceneActivity : AppCompatActivity(), MoveListener,
 
     override fun onMoveMade(moveCount: Int) {
         this.moveCount = moveCount
-        val formattedMoveTitle =
+        /*val formattedMoveTitle =
             getString(R.string.move_title_format, getString(R.string.move), moveCount)
-        move_value.text = formattedMoveTitle
+        move_value.text = formattedMoveTitle*/
     }
 
     override fun onRestartClicked() {
         // Reset time, move, toggleButton
         moveCount = 0
-        val formattedMoveCount = getString(R.string.move_format, moveCount)
-        move_value.text = formattedMoveCount
+        /*val formattedMoveCount = getString(R.string.move_format, moveCount)
+        move_value.text = formattedMoveCount*/
         time_value.text = getString(R.string.time)
-        toggleButton.setIconResource(R.drawable.ic_baseline_music_note_24)
         // Reset adapter and recycler view
         onDialogDismissed()
     }
@@ -216,7 +244,6 @@ class SceneActivity : AppCompatActivity(), MoveListener,
     }
 
     private fun isNotificationPermissionGranted(): Boolean {
-        // Перевіряємо, чи маємо ми дозвіл на сповіщення
         return ContextCompat.checkSelfPermission(
             this,
             "com.google.android.c2dm.permission.RECEIVE"
@@ -225,7 +252,6 @@ class SceneActivity : AppCompatActivity(), MoveListener,
 
     private fun requestNotificationPermission() {
         val notificationPermissionCode = 123
-        // Запитуємо дозвіл на сповіщення
         ActivityCompat.requestPermissions(
             this,
             arrayOf("com.google.android.c2dm.permission.RECEIVE"),
