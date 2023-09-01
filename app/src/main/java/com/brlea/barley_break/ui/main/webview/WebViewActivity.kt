@@ -4,10 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
 import android.view.View
-import android.webkit.WebResourceError
-import android.webkit.WebResourceRequest
-import android.webkit.WebView
-import android.webkit.WebViewClient
+import android.webkit.*
 import androidx.appcompat.app.AppCompatActivity
 import com.brlea.barley_break.R
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
@@ -28,7 +25,9 @@ class WebViewActivity : AppCompatActivity() {
         WebViewShow.settings.apply {
             javaScriptEnabled = true
             domStorageEnabled = true
+            mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
         }
+        WebViewShow.webViewClient = WebViewClient()
         WebViewShow.loadUrl(mainLink)
     }
 
