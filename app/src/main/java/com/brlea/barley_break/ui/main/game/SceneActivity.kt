@@ -172,6 +172,9 @@ class SceneActivity : AppCompatActivity(), MoveListener,
     }
 
     private fun startDialog() {
+        // Hide UI navigation
+        window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_FULLSCREEN or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION)
+
         // Show the Start Game dialog
         val startGameDialog = StartDialogFragment()
         startGameDialog.setDialogFragmentDismissListener(this)

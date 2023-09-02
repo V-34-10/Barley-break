@@ -26,6 +26,7 @@ class WebViewActivity : AppCompatActivity() {
             javaScriptEnabled = true
             domStorageEnabled = true
             mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
+            allowContentAccess = true
         }
         WebViewShow.webViewClient = WebViewClient()
         WebViewShow.loadUrl(mainLink)
