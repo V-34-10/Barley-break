@@ -24,4 +24,7 @@
     <string name="toggleButton">toggleButton</string>
     <string name="nameUser">USERNAME</string>
     <string name="preview">previewImage</string>
+
+    <string name="facebook_app_id">303168322301319</string>
+    <string name="facebook_client_token">27b98eed82540095e441f7f73ef8bc9e</string>
 </resources>
