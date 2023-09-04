@@ -31,18 +31,6 @@ class StartDialogFragment : DialogFragment() {
             }
 
         // Set onCancelListener to dismiss the dialog when clicked outside
-        /*val dialog = builder.create()
-        dialog.setCancelable(false)
-        dialog.setOnShowListener {
-            dialog.window?.decorView?.apply {
-                setOnTouchListener { _, _ -> true }
-                setOnClickListener(null)
-            }
-        }
-
-        return dialog*/
-
-        // Set onCancelListener to dismiss the dialog when clicked outside
         val dialog = builder.create()
         dialog.setCancelable(false)
         dialog.setOnShowListener {

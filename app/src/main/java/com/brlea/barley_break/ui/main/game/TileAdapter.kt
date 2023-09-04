@@ -5,14 +5,11 @@ import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.OvershootInterpolator
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.brlea.barley_break.R
-import com.brlea.barley_break.ui.dialog.StartDialogFragment
 import com.brlea.barley_break.ui.dialog.VictoryDialogFragment
 import java.util.*
 import kotlin.math.abs
@@ -20,13 +17,9 @@ import kotlin.math.abs
 class TileAdapter(
     private val recyclerView: RecyclerView,
     private val tileList: MutableList<Int>,
-    //private val moveCounter: TextView,
-    //private val moveListener: MoveListener,
-    private val dialogFragmentDismissListener: StartDialogFragment.DialogFragmentDismissListener
+    private val dialogFragmentDismissListener: SceneActivity? = null
 ) : RecyclerView.Adapter<TileAdapter.ViewHolder>() {
-
     private var emptyPosition: Int = tileList.size - 1
-    //private var moves = 0
     private var startTime: Long = 0 // Initialize the startTime property
     private val correctTilePositions: List<Int> = listOf(
         R.drawable.cub_1,
@@ -62,7 +55,6 @@ class TileAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(tileList[position])
-        //moveCounter.text = moves.toString()
     }
 
     override fun getItemCount(): Int {
@@ -88,16 +80,10 @@ class TileAdapter(
             imageView.setImageResource(tileImageResource)
             itemView.setOnClickListener {
                 if (canMove(bindingAdapterPosition)) {
-                    /*moves++
-                    moveCounter.text = moves.toString()*/
                     swapTiles(bindingAdapterPosition, emptyPosition)
                     notifyItemChanged(bindingAdapterPosition)
                     notifyItemChanged(emptyPosition)
                     emptyPosition = bindingAdapterPosition
-
-                    // Notify the activity of the move
-                    /*moveListener.onMoveMade(moves)
-                    animateTitleWithTimeAndMoves()*/
 
                     // Use Handler to delay the start of music playback
                     playMusicHandler.postDelayed({
@@ -120,24 +106,6 @@ class TileAdapter(
             handler.removeCallbacks(updateTimeRunnable)
             playMusicHandler.removeCallbacksAndMessages(null)
         }
-
-        /*private fun animateTitleWithTimeAndMoves() {
-            // Animate the move count view
-            moveCounter.animate()
-                .scaleX(1.2f)
-                .scaleY(1.2f)
-                .setDuration(500)
-                .setInterpolator(OvershootInterpolator())
-                .withEndAction {
-                    // After scaling up, animate back to the original size
-                    moveCounter.animate()
-                        .scaleX(1f)
-                        .scaleY(1f)
-                        .setDuration(300)
-                        .start()
-                }
-                .start()
-        }*/
     }
 
     init {

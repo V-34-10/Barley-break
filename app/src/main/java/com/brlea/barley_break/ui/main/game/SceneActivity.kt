@@ -12,9 +12,9 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import com.brlea.barley_break.R
-import com.brlea.barley_break.ui.dialog.InfoDialogFragment
 import com.brlea.barley_break.ui.dialog.StartDialogFragment
 import com.brlea.barley_break.ui.dialog.VictoryDialogFragment
+import com.brlea.barley_break.utils.RemoteConfigUtils
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import kotlinx.android.synthetic.main.activity_scene.*
 import java.util.concurrent.TimeUnit
@@ -23,24 +23,6 @@ class SceneActivity : AppCompatActivity(), MoveListener,
     StartDialogFragment.DialogFragmentDismissListener,
     VictoryDialogFragment.DialogFragmentDismissListener {
     private var moveCount = 0
-
-    /*private var tileImagesOriginal = mutableListOf(
-        R.drawable.cub_1,
-        R.drawable.cub_2,
-        R.drawable.cub_3,
-        R.drawable.cub_4,
-        R.drawable.cub_5,
-        R.drawable.cub_6,
-        R.drawable.cub_7,
-        R.drawable.cub_8,
-        R.drawable.cub_9,
-        R.drawable.cub_10,
-        R.drawable.cub_11,
-        R.drawable.cub_12,
-        R.drawable.cub_13,
-        R.drawable.cub_14,
-        R.drawable.cub_15
-    )*/
     private var tileImagesShuffle = mutableListOf(
         R.drawable.cub_1,
         R.drawable.cub_2,
@@ -60,7 +42,6 @@ class SceneActivity : AppCompatActivity(), MoveListener,
     )
     private var isMusicOn = true
     private lateinit var tileAdapter: TileAdapter
-    private lateinit var policyLink: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_scene)
@@ -68,6 +49,13 @@ class SceneActivity : AppCompatActivity(), MoveListener,
         controlPanel()
         initNotification()
         getNameUser()
+
+    }
+
+    private fun getMusicOn() {
+        val intentValue = intent.getBooleanExtra("isMusic", isMusicOn)
+        isMusicOn = intentValue
+        tileAdapter.updateMusicState(isMusicOn)
     }
 
     private fun controlPanel() {
@@ -95,27 +83,8 @@ class SceneActivity : AppCompatActivity(), MoveListener,
 
         info_Button.setOnClickListener {
             info_Button.startAnimation(animation)
-            /*val infoGameDialog = InfoDialogFragment()
-            infoGameDialog.show(supportFragmentManager, "info_game_dialog")*/
-            setRemoteLink()
+            RemoteConfigUtils.openPolicyLink(this)
         }
-
-        /*finishedButton.setOnClickListener {
-            finishedButton.startAnimation(animation)
-            tileAdapter = TileAdapter(
-                sceneGame,
-                (tileImagesOriginal + R.drawable.as_16) as MutableList<Int>,
-                move_value,
-                this,
-                this
-            )
-            tileAdapter.setStartTime(System.currentTimeMillis()) // Set the start time
-
-            sceneGame.apply {
-                layoutManager = GridLayoutManager(this@SceneActivity, 4)
-                this.adapter = tileAdapter
-            }
-        }*/
 
         back_Button.setOnClickListener {
             val go = Intent(this@SceneActivity, MenuActivity::class.java)
@@ -135,19 +104,6 @@ class SceneActivity : AppCompatActivity(), MoveListener,
         }
     }
 
-    private fun setRemoteLink() {
-        val remoteConfig = FirebaseRemoteConfig.getInstance()
-        remoteConfig.fetch().addOnCompleteListener(this) { task ->
-            if (task.isSuccessful) {
-                remoteConfig.activate().addOnSuccessListener {
-                    policyLink = remoteConfig.getString("policy_link")
-                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(policyLink))
-                    startActivity(intent)
-                }
-            }
-        }
-    }
-
     private fun getNameUser() {
         val username = intent.getStringExtra("username")
         user_name_nick.text = username ?: "USERNAME"
@@ -158,8 +114,6 @@ class SceneActivity : AppCompatActivity(), MoveListener,
         tileAdapter = TileAdapter(
             sceneGame,
             (tileImagesShuffle + R.drawable.as_16) as MutableList<Int>,
-            //move_value,
-            //this,
             this
         )
         tileAdapter.setStartTime(System.currentTimeMillis()) // Set the start time
@@ -181,6 +135,7 @@ class SceneActivity : AppCompatActivity(), MoveListener,
     override fun onDialogDismissed() {
         // The dialog has been dismissed, you can start the main game session here
         initRecycler()
+        getMusicOn()
     }
 
     fun updateElapsedTime(startTime: Long) {
@@ -197,16 +152,13 @@ class SceneActivity : AppCompatActivity(), MoveListener,
 
     override fun onMoveMade(moveCount: Int) {
         this.moveCount = moveCount
-        /*val formattedMoveTitle =
-            getString(R.string.move_title_format, getString(R.string.move), moveCount)
-        move_value.text = formattedMoveTitle*/
     }
 
     override fun onRestartClicked() {
-        // Reset time, move, toggleButton
+        // Reset time, toggleButton
         moveCount = 0
-        /*val formattedMoveCount = getString(R.string.move_format, moveCount)
-        move_value.text = formattedMoveCount*/
+        isMusicOn = true
+        tileAdapter.updateMusicState(isMusicOn)
         time_value.text = getString(R.string.time)
         // Reset adapter and recycler view
         onDialogDismissed()
