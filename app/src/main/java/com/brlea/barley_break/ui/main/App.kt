@@ -1,7 +1,10 @@
 package com.brlea.barley_break.ui.main
 
 import android.app.Application
+import android.util.Log
 import com.appsflyer.AppsFlyerLib
+import com.facebook.FacebookSdk
+import com.facebook.appevents.AppEventsLogger
 import com.google.firebase.FirebaseApp
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
@@ -10,6 +13,7 @@ import com.onesignal.debug.LogLevel
 
 const val ONESIGNAL_APP_ID = "8f98ee91-4b98-4be4-abf3-e258944cf92b"
 const val APPSFlYER_ID = "HE5itBfhEBq4SV8CBcnJiG"
+
 class App : Application() {
 
     override fun onCreate() {
@@ -18,6 +22,7 @@ class App : Application() {
         FirebaseApp.initializeApp(this)
         initRemoteConfig()
         initAppsFlyer()
+        initFacebook()
     }
 
     private fun initOneSignal() {
@@ -38,5 +43,16 @@ class App : Application() {
             .setMinimumFetchIntervalInSeconds(30)
             .build()
         remoteConfig.setConfigSettingsAsync(configSettings)
+    }
+
+    private fun initFacebook() {
+        FacebookSdk.sdkInitialize(applicationContext)
+        AppEventsLogger.activateApp(this)
+        //check Initialize
+        if (FacebookSdk.isInitialized()) {
+            Log.d("FacebookSDK", "Facebook SDK Initialize successfully")
+        } else {
+            Log.e("FacebookSDK", "Error initialize Facebook SDK")
+        }
     }
 }
