@@ -20,7 +20,6 @@ import kotlinx.android.synthetic.main.control_panel_menu.*
 class MenuActivity : AppCompatActivity() {
     private var isMusicOn = true
     private var isActivityRun = false
-    private lateinit var callbackManager: CallbackManager
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
@@ -73,13 +72,11 @@ class MenuActivity : AppCompatActivity() {
 
     private fun loadingNextActivity() {
         val user = username_layout.text.toString()
-        Handler().postDelayed({
-            // run SceneActivity
-            val go = Intent(this@MenuActivity, SceneActivity::class.java)
-            go.putExtra("username", user)
-            go.putExtra("isMusic", isMusicOn)
-            startActivity(go)
-            finish()
-        }, 3 * 1000.toLong())
+        // run SceneActivity
+        val go = Intent(this@MenuActivity, SceneActivity::class.java)
+        go.putExtra("username", user)
+        go.putExtra("isMusic", isMusicOn)
+        startActivity(go)
+        finish()
     }
 }
