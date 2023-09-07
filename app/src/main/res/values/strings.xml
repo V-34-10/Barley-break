@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Gilded Fish</string>
+    <string name="app_name">Goal Net Puzzle</string>
     <string name="time_title">Time: </string>
     <string name="move_title">Move: 0</string>
     <string name="Move">Move: </string>

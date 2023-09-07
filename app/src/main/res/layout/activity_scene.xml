@@ -127,7 +127,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/back_frame"
             android:orientation="vertical"
-            android:padding="@dimen/dp50"
+            android:padding="@dimen/dp20"
             android:layout_gravity="center"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
