@@ -39,7 +39,7 @@ class StartDialogFragment : DialogFragment() {
                 setOnClickListener(null)
                 setOnKeyListener { _, keyCode, _ ->
                     if (keyCode == KeyEvent.KEYCODE_BACK) {
-                        // Ігнорувати клавішу "Back"
+                        // no reaction "Back"
                         return@setOnKeyListener true
                     }
                     return@setOnKeyListener false

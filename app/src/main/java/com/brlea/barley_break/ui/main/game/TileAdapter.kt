@@ -81,23 +81,30 @@ class TileAdapter(
             itemView.setOnClickListener {
                 if (canMove(bindingAdapterPosition)) {
                     swapTiles(bindingAdapterPosition, emptyPosition)
-                    notifyItemChanged(bindingAdapterPosition)
-                    notifyItemChanged(emptyPosition)
+                    // change notifyItemChanged on ScaleX/Y
+                    itemView.scaleX = 1.2f
+                    itemView.scaleY = 1.2f
                     emptyPosition = bindingAdapterPosition
 
-                    // Use Handler to delay the start of music playback
-                    playMusicHandler.postDelayed({
-                        if (isMusicOn) {
-                            val newMediaPlayer = MediaPlayer.create(
-                                recyclerView.context,
-                                R.raw.stones
-                            )
-                            newMediaPlayer.setOnCompletionListener {
-                                it.release() // Release the MediaPlayer once playback is complete
-                            }
-                            newMediaPlayer.start()
+                    if (isMusicOn) {
+                        val newMediaPlayer = MediaPlayer()
+                        val assetFileDescriptor = recyclerView.context.resources.openRawResourceFd(R.raw.stones)
+                        newMediaPlayer.setDataSource(
+                            assetFileDescriptor.fileDescriptor,
+                            assetFileDescriptor.startOffset,
+                            assetFileDescriptor.length
+                        )
+                        newMediaPlayer.setOnCompletionListener {
+                            it.release() // Release the MediaPlayer once playback is complete
                         }
-                    }, 100) // Adjust the delay time as needed
+                        newMediaPlayer.prepare()
+                        newMediaPlayer.start()
+                    }
+
+                    Handler().postDelayed({
+                        itemView.scaleX = 1.0f
+                        itemView.scaleY = 1.0f
+                    }, 100)
                 }
             }
         }
