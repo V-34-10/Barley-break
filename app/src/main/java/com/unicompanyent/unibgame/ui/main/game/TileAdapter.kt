@@ -1,4 +1,4 @@
-package com.brlea.barley_break.ui.main.game
+package com.unicompanyent.unibgame.ui.main.game
 
 import android.media.MediaPlayer
 import android.os.Handler
@@ -9,8 +9,8 @@ import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.brlea.barley_break.R
-import com.brlea.barley_break.ui.dialog.VictoryDialogFragment
+import com.unicompanyent.unibgame.R
+import com.unicompanyent.unibgame.ui.dialog.VictoryDialogFragment
 import java.util.*
 import kotlin.math.abs
 

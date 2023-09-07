@@ -11,7 +11,7 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <permission
-        android:name="com.brlea.barley_break.permission.C2D_MESSAGE"
+        android:name="com.unicompanyent.unibgame.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
 
     <uses-permission android:name="com.example.package.permission.C2D_MESSAGE" />

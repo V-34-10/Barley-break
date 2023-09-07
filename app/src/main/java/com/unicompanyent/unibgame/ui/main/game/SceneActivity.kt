@@ -1,8 +1,7 @@
-package com.brlea.barley_break.ui.main.game
+package com.unicompanyent.unibgame.ui.main.game
 
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -11,11 +10,10 @@ import android.view.animation.AnimationUtils
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
-import com.brlea.barley_break.R
-import com.brlea.barley_break.ui.dialog.StartDialogFragment
-import com.brlea.barley_break.ui.dialog.VictoryDialogFragment
-import com.brlea.barley_break.utils.RemoteConfigUtils
-import com.google.firebase.remoteconfig.FirebaseRemoteConfig
+import com.unicompanyent.unibgame.R
+import com.unicompanyent.unibgame.ui.dialog.StartDialogFragment
+import com.unicompanyent.unibgame.ui.dialog.VictoryDialogFragment
+import com.unicompanyent.unibgame.utils.RemoteConfigUtils
 import kotlinx.android.synthetic.main.activity_scene.*
 import java.util.concurrent.TimeUnit
 

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Goal Net Puzzle</string>
+    <string name="app_name">Uni Official Game</string>
     <string name="time_title">Time: </string>
     <string name="move_title">Move: 0</string>
     <string name="Move">Move: </string>
@@ -25,7 +25,7 @@
     <string name="nameUser">USERNAME</string>
     <string name="preview">previewImage</string>
 
-    <string name="facebook_app_id">957367418700597</string>
-    <string name="fb_login_protocol_scheme">fb957367418700597</string>
-    <string name="facebook_client_token">baa45074049b2505f915e5d2e1a1c0ea</string>
+    <string name="facebook_app_id"></string>
+    <string name="fb_login_protocol_scheme"></string>
+    <string name="facebook_client_token"></string>
 </resources>

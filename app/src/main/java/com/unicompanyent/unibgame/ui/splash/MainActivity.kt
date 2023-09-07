@@ -1,4 +1,4 @@
-package com.brlea.barley_break.ui.splash
+package com.unicompanyent.unibgame.ui.splash
 
 import android.content.Context
 import android.content.Intent
@@ -8,9 +8,9 @@ import android.os.Bundle
 import android.os.Handler
 import android.telephony.TelephonyManager
 import android.view.View
-import com.brlea.barley_break.R
-import com.brlea.barley_break.ui.main.game.MenuActivity
-import com.brlea.barley_break.ui.main.webview.WebViewActivity
+import com.unicompanyent.unibgame.R
+import com.unicompanyent.unibgame.ui.main.game.MenuActivity
+import com.unicompanyent.unibgame.ui.main.webview.WebViewActivity
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

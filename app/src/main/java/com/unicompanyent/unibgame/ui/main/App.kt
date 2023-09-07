@@ -1,4 +1,4 @@
-package com.brlea.barley_break.ui.main
+package com.unicompanyent.unibgame.ui.main
 
 import android.app.Application
 import android.util.Log
@@ -11,8 +11,8 @@ import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
 import com.onesignal.OneSignal
 import com.onesignal.debug.LogLevel
 
-const val ONESIGNAL_APP_ID = "8f98ee91-4b98-4be4-abf3-e258944cf92b"
-const val APPSFlYER_ID = "HE5itBfhEBq4SV8CBcnJiG"
+const val ONESIGNAL_APP_ID = "cbcadf78-1102-4103-b994-cb30ef11e387"
+const val APPSFlYER_ID = ""
 
 class App : Application() {
 

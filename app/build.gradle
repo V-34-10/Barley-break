@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace 'com.brlea.barley_break'
+    namespace 'com.unicompanyent.unibgame'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.brlea.barley_break"
+        applicationId "com.unicompanyent.unibgame"
         minSdk 23
         targetSdk 33
         versionCode 1

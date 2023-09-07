@@ -1,4 +1,4 @@
-package com.brlea.barley_break.utils
+package com.unicompanyent.unibgame.utils
 
 import android.content.Context
 import android.content.Intent
@@ -11,7 +11,7 @@ object RemoteConfigUtils {
         remoteConfig.fetch().addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 remoteConfig.activate().addOnSuccessListener {
-                    val policyLink = remoteConfig.getString("policy_link")
+                    val policyLink = remoteConfig.getString("uni_privacy_policy_key")
                     val intent = Intent(Intent.ACTION_VIEW, Uri.parse(policyLink))
                     context.startActivity(intent)
                 }

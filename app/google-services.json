@@ -1,41 +1,33 @@
 {
   "project_info": {
-    "project_number": "1022263491600",
-    "project_id": "fifteen-puzzle-2b957",
-    "storage_bucket": "fifteen-puzzle-2b957.appspot.com"
+    "project_number": "376827604883",
+    "project_id": "unigame-11384",
+    "storage_bucket": "unigame-11384.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1022263491600:android:8c279858e545ba8eee5e95",
+        "mobilesdk_app_id": "1:376827604883:android:4c2a18df358d3c8a7d8266",
         "android_client_info": {
-          "package_name": "com.brlea.barley_break"
+          "package_name": "com.unicompanyent.unibgame"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1022263491600-236v1g1dbub9q9tv08027p1vogq1m7v7.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.brlea.barley_break",
-            "certificate_hash": "9e619133545cdf8839f51498f78f16abba88a602"
-          }
-        },
-        {
-          "client_id": "1022263491600-lomds0t6nf9kmrdi0jaejnte2nsr0dt7.apps.googleusercontent.com",
+          "client_id": "376827604883-u6ilgua5q2tk0v8mk9soeu43uiqb356s.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCt_IgQMY2B24hN2NFnt1VsRg023Ioayyg"
+          "current_key": "AIzaSyDXc9k0s-VeNnQXDmlXeKC8-fQS1JpT7cE"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1022263491600-lomds0t6nf9kmrdi0jaejnte2nsr0dt7.apps.googleusercontent.com",
+              "client_id": "376827604883-u6ilgua5q2tk0v8mk9soeu43uiqb356s.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

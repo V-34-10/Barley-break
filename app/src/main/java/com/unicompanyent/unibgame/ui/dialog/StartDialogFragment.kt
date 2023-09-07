@@ -1,4 +1,4 @@
-package com.brlea.barley_break.ui.dialog
+package com.unicompanyent.unibgame.ui.dialog
 
 import android.app.AlertDialog
 import android.app.Dialog
@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.view.KeyEvent
 import android.view.View
 import androidx.fragment.app.DialogFragment
-import com.brlea.barley_break.R
+import com.unicompanyent.unibgame.R
 
 class StartDialogFragment : DialogFragment() {
 

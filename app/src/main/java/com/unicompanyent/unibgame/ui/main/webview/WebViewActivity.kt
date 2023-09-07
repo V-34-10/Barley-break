@@ -1,12 +1,11 @@
-package com.brlea.barley_break.ui.main.webview
+package com.unicompanyent.unibgame.ui.main.webview
 
 import android.os.Bundle
-import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.webkit.*
 import androidx.appcompat.app.AppCompatActivity
-import com.brlea.barley_break.R
+import com.unicompanyent.unibgame.R
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 
 class WebViewActivity : AppCompatActivity() {
@@ -56,7 +55,7 @@ class WebViewActivity : AppCompatActivity() {
         remoteConfig.fetch().addOnCompleteListener(this) { task ->
             if (task.isSuccessful) {
                 remoteConfig.activate().addOnSuccessListener {
-                    mainLink = remoteConfig.getString("mainLink")
+                    mainLink = remoteConfig.getString("uni_main_ball_key")
                     initWebView()
                 }
             }
