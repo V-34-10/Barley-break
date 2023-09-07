@@ -24,8 +24,4 @@
     <string name="toggleButton">toggleButton</string>
     <string name="nameUser">USERNAME</string>
     <string name="preview">previewImage</string>
-
-    <string name="facebook_app_id"></string>
-    <string name="fb_login_protocol_scheme"></string>
-    <string name="facebook_client_token"></string>
 </resources>

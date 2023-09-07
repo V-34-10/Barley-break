@@ -22,7 +22,7 @@ class App : Application() {
         FirebaseApp.initializeApp(this)
         initRemoteConfig()
         initAppsFlyer()
-        initFacebook()
+        //initFacebook()
     }
 
     private fun initOneSignal() {
@@ -45,7 +45,7 @@ class App : Application() {
         remoteConfig.setConfigSettingsAsync(configSettings)
     }
 
-    private fun initFacebook() {
+    /*private fun initFacebook() {
         FacebookSdk.sdkInitialize(applicationContext)
         AppEventsLogger.activateApp(this)
         //check Initialize
@@ -54,5 +54,5 @@ class App : Application() {
         } else {
             Log.e("FacebookSDK", "Error initialize Facebook SDK")
         }
-    }
+    }*/
 }
