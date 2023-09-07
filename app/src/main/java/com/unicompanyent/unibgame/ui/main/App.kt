@@ -3,8 +3,7 @@ package com.unicompanyent.unibgame.ui.main
 import android.app.Application
 import android.util.Log
 import com.appsflyer.AppsFlyerLib
-import com.facebook.FacebookSdk
-import com.facebook.appevents.AppEventsLogger
+
 import com.google.firebase.FirebaseApp
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
