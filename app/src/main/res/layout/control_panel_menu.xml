@@ -24,7 +24,6 @@
             app:icon="@drawable/but_exit"
             app:iconGravity="start"
             app:iconSize="@dimen/button_menu_icon_size"
-            app:iconTint="@color/Triadic"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -39,7 +38,6 @@
             app:icon="@drawable/but_info"
             app:iconGravity="start"
             app:iconSize="@dimen/button_menu_icon_size"
-            app:iconTint="@color/Triadic"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/exitButton"
             app:layout_constraintTop_toTopOf="parent" />
@@ -55,7 +53,6 @@
             app:icon="@drawable/but_sound_on"
             app:iconGravity="start"
             app:iconSize="@dimen/button_menu_icon_size"
-            app:iconTint="@color/Triadic"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/infoButton"

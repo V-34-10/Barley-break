@@ -4,41 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/back_menu"
+    android:background="@drawable/back_main"
     tools:context=".ui.main.game.MenuActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/controlPart"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/dp0"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/app_name"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_marginTop="150dp"
-            android:fontFamily="@font/actor"
-            android:text="@string/app_name"
-            android:textAlignment="center"
-            android:textColor="@color/Triadic"
-            android:textSize="@dimen/app_name_size"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <include
             android:id="@+id/include"
             layout="@layout/control_panel_menu"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginTop="40dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/app_name" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/username_layout"
@@ -50,7 +35,8 @@
             android:inputType="textPersonName"
             android:maxLength="10"
             android:textAlignment="center"
-            android:textColor="@color/Triadic"
+            android:textColor="@color/silver"
+            android:textColorHint="@color/silver"
             android:textSize="@dimen/sp45"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -67,7 +53,6 @@
             app:icon="@drawable/but_play"
             app:iconGravity="textStart"
             app:iconSize="@dimen/dp100"
-            app:iconTint="@color/Triadic"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/username_layout" />
